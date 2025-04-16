@@ -1,0 +1,55 @@
+/* ===== ===== ===== Panels ===== ===== ===== */
+.push-down {
+    padding-top: 50px;
+}
+
+/* ===== ===== ===== Left Panel ===== ===== ===== */
+.p-0 {
+    background: rgba(24, 20, 0, 0.5);
+}
+.p-4 {
+    color: white;
+}
+
+/* ===== ===== ===== Right Panel ===== ===== ===== */
+.p-5 {
+    background-color: #A4B465;
+}
+
+form {
+    padding-top: 1em;
+}
+
+/* ===== ===== ===== Buttons (for Explore Top Parks) ===== ===== ===== */
+.btn-success {
+    background-color: #ffc250df;
+    border: none;
+    color: white;
+}
+.btn-success:hover {
+    background-color: #626F47;
+    border: none;
+    color: white;
+}
+.btn-success:hover::after {
+    background-color: #626F47;
+    border: none;
+    color: black;
+}
+
+/* ===== ===== ===== Checkbox Toggles (for Submit Your Own Park) ===== ===== ===== */
+.custom-btn {
+    background-color: #ffc250df;
+    border-radius: 15px;
+    border-color: #626F47;
+    color: white;
+}
+.custom-btn:hover {
+    background-color: #626F47;
+    color: black;
+}
+
+/* ===== ===== ===== Texts ===== ===== ===== */
+h3, h5 {
+    color: white;
+}
