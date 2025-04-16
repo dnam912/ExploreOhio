@@ -1,0 +1,66 @@
+/* ===== ===== ===== Background Image ===== ===== ===== */
+.bg-img {
+    height: 125vh;
+    width: 100vw;
+    object-fit: cover;
+    filter: brightness(0.85);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* ===== ===== ===== Navbar ===== ===== ===== */
+.navbar {
+    background-color: rgba(98, 111, 71, 1); /*#626F47*/
+    /*backdrop-filter: blur(5px);*/
+
+    position: fixed;
+    width: 100%;
+}
+.nav-link {
+    transition: all 0.2s;
+}
+.nav-link:hover {
+    color: #FEFAE0;
+}
+.nav-link:hover::after {
+    color: #FFCF50;
+}
+
+/* ===== ===== ===== Our Goal ===== ===== ===== */
+.our-goal-section {
+    padding-top: 60px; /*To not make section look squished by navbar*/
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.our-goal-section .container {
+    padding: 5%;
+    width: 100vw;
+    height: 60vh;
+
+    background: rgba(24, 20, 0, 0.6);
+    color: white;
+    text-align: center;
+}
+
+/* ===== ===== ===== Button ===== ===== ===== */
+.btn-brand {
+    margin-top: 5%;
+    background-color: #ffc250df;
+    border: none;
+
+    color: white;
+}
+.btn-brand:hover {
+    background-color: #626F47;
+}
+
+/* ===== ===== ===== Texts ===== ===== ===== */
+h1 {
+    color: white;;
+}
