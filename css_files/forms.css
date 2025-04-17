@@ -7,7 +7,7 @@
 .p-0 {
     background: rgba(24, 20, 0, 0.5);
 }
-.p-4 {
+.p-4 { /* h1 Submit New Park*/
     color: white;
 }
 
@@ -36,20 +36,27 @@ form {
     border: none;
     color: black;
 }
+input[type="file"] { /* Hides a 'Choose File' message */
+    display: none;
+}
 
 /* ===== ===== ===== Checkbox Toggles (for Submit Your Own Park) ===== ===== ===== */
 .custom-btn {
     background-color: #ffc250df;
     border-radius: 15px;
-    border-color: #626F47;
+    border-color: 2px solid;
     color: white;
 }
 .custom-btn:hover {
-    background-color: #626F47;
-    color: black;
+    background-color: #626F47 !important;
+    color: white !important;
+}
+.btn-check:checked + .custom-btn {
+    background-color: #626F47 !important;
+    color: white !important;
 }
 
 /* ===== ===== ===== Texts ===== ===== ===== */
-h3, h5 {
+h3, h6 {
     color: white;
 }
