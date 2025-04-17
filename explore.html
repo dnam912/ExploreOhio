@@ -11,54 +11,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
-        <!-- Interactive Star Rating Stylesheet -->
-        <!-- Reference of Interactive Star Rating: https://bootstrapexamples.com/@mason/interactive-star-rating -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <style>
-            .star-rating {
-                                direction: rtl;
-                                display: inline-block;
-                                cursor: pointer;
-            }
-            .star-rating input {
-                display: none;
-            }
-            .star-rating label {
-                color: #ddd;
-                font-size: 48px;
-                padding: 0 4px;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            .star-rating label:hover,
-            .star-rating label:hover~label,
-            .star-rating input:checked~label {
-                color: #ffc250df;
-            }
-        </style>
-        <script>
-            document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
-                star.addEventListener('click', function() { 
-                    this.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 200);
-                });
-            });
-        </script>
-         <!-- End of Interactive Star Rating -->
-
         <!-- Include CSS -->
         <link href="css_files/style.css" rel="stylesheet"/>
-        <link href="css_files/forms.css" rel="stylesheet"/>
         <title>Explore Ohio</title>
     </head>
 
-
     <body>
-        <!-- Navigation Bar -->
+        <!-- Navigation Bar bg-body-tertiary -->
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid px-6">
+            <div class="container-fluid px-4">
                 <a class="navbar-brand" href="index.html" style="font-size: 1.5em">Explore Ohio</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,6 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ms-auto">
                         <a class="nav-link" href="explore.html"> Explore Top Parks </a>
+                        <a class="nav-link" href="review.html"> Review a Park </a>
                         <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
                         <a class="nav-link" href="handy.html"> Handy Resources </a>
                         <a class="nav-link" href="map.html"> Interactive Map</a>
@@ -77,58 +39,7 @@
         </nav>
 
 
-        <!-- Panels -->
-        <div class="container-fluid push-down">
-            <div class="row min-vh-100">
-            
-                <!-- Left panel -->
-                <div class="col-md-6 p-0">
-                    <div class="h-100 d-flex flex-column justify-content-center align-items-center text-center">
-                        <h1 class="p-4">Review a Park</h1>
-                    </div>
-                </div>
-        
-                <!-- Right panel -->
-                <div class="col-md-6 p-5">
-                    <form>
-                        <h3>Location</h3>
-                        <input class="form-control mb-5" type="text" placeholder="Park Name" style="background-color: #FEFAE0">
-                
-                        <h3>Rate This Park</h3>
-                        
-                        <!-- Interactive Star Rating -->
-                        <div class="col-md-6" style="padding-bottom: 5%">
-                            <div class="rating-card">
-                                <div class="star-rating animated-stars">
-                                    <input type="radio" id="star5" name="rating" value="5">
-                                    <label for="star5" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star4" name="rating" value="4">
-                                    <label for="star4" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star3" name="rating" value="3">
-                                    <label for="star3" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star2" name="rating" value="2">
-                                    <label for="star2" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star1" name="rating" value="1">
-                                    <label for="star1" class="bi bi-star-fill"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End of Interactive Star Rating -->
 
-                        <h3>Details on Your Experience</h3>
-                        <textarea class="form-control mb-4" rows="4" type="text" placeholder="Describe your experience" style="background-color: #FEFAE0;"></textarea>
-                
-                        <div class="d-flex gap-4">
-                            <button type="upload" class="btn btn-success">Upload Photos</button>
-                            <button type="submit" class="btn btn-success">Submit Review</button>
-                        </div>
-                    </form>
-                </div>
-        
-            </div>
-        </div>      
-
-        
         <!-- Background -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
     </body>
