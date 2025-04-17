@@ -19,8 +19,11 @@
 form {
     padding-top: 1em;
 }
+.custom-divider{ /* Borderline in the middle of panels */
+    border-left: 1em solid #FEFAE0 !important;
+}
 
-/* ===== ===== ===== Buttons (for Explore Top Parks) ===== ===== ===== */
+/* ===== ===== ===== Buttons ===== ===== ===== */
 .btn-success {
     background-color: #ffc250df;
     border: none;
@@ -40,7 +43,7 @@ input[type="file"] { /* Hides a 'Choose File' message */
     display: none;
 }
 
-/* ===== ===== ===== Checkbox Toggles (for Submit Your Own Park) ===== ===== ===== */
+/* ===== ===== ===== Checkbox Toggles ===== ===== ===== */
 .custom-btn {
     background-color: #ffc250df;
     border-radius: 15px;
@@ -57,6 +60,6 @@ input[type="file"] { /* Hides a 'Choose File' message */
 }
 
 /* ===== ===== ===== Texts ===== ===== ===== */
-h3, h6 {
+h2, h3, h6 {
     color: white;
 }
