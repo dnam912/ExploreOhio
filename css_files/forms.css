@@ -1,12 +1,15 @@
+
 /* ===== ===== ===== Panels ===== ===== ===== */
 .push-down {
     padding-top: 50px;
 }
 
-/* ===== ===== ===== Left Panel ===== ===== ===== */
-.p-0 {
-    background: rgba(24, 20, 0, 0.5);
+.scrollable-panel { /* Scrollable right panel */
+    height: 100vh;
+    overflow-y: auto;
 }
+
+/* ===== ===== ===== Left Panel ===== ===== ===== */
 .p-4 { /* h1 Submit New Park*/
     color: white;
 }
@@ -19,8 +22,14 @@
 form {
     padding-top: 1em;
 }
-.custom-divider{ /* Borderline in the middle of panels */
+
+/* ===== ===== ===== Borderline in the Middle of Panels ===== ===== ===== */
+.custom-divider-left {
     border-left: 1em solid #FEFAE0 !important;
+}
+
+.custom-divider-top {
+    border-top: 1em solid #FEFAE0 !important;
 }
 
 /* ===== ===== ===== Buttons ===== ===== ===== */
