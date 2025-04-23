@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        
+        <!-- Responsive meta tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Include via CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+        <!-- Select tags -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+        <!-- Include CSS -->
+        <link href="css_files/style.css" rel="stylesheet"/>
+        <link href="css_files/forms.css" rel="stylesheet"/>
+        <title>Explore Ohio</title>
+    </head>
+
+
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid px-6">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">Explore Ohio</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="explore.html"> Explore Top Parks </a>
+                        <a class="nav-link" href="review.html"> Review a Park </a>
+                        <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
+                        <a class="nav-link" href="handy.html"> Handy Resources </a>
+                        <a class="nav-link" href="map.html"> Interactive Map</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Panels -->
+        <div class="container-fluid push-down">
+            <div class="row min-vh-100">
+            
+                <!-- Left panel -->
+                <div class="col-md-6 p-0">
+                    <div class="h-100 d-flex flex-column justify-content-center align-items-center text-center">
+                        <h1 class="p-4">Submit New Park</h1>
+                    </div>
+                </div>
+        
+                <!-- Right panel -->
+                <div class="col-md-6 p-5 border-start custom-divider">
+                    <form id="submitPark" method="POST" action="/submit-park" enctype="multipart/form-data">
+                        <h3>Park Name</h3>
+                        <input name="parkName" class="form-control mb-4" type="text" placeholder="Park Name" id="parkName" style="background-color: #FEFAE0">
+
+                        <h3>Latitude, Longitude</h3>
+                        <input name="latLong" class="form-control mb-5" type="text" placeholder="Latitude, Longitude" id="latLong" style="background-color: #FEFAE0">
+
+                        <!-- Checkbox Toggle Buttons -->
+                        <h3>Is this a Park or Hiking Trail?</h3><h6>(select all that apply)</h6>
+                        <div class="d-flex gap-4 mb-5">
+                            <input name="isPark" type="checkbox" class="btn-check" id="btn-check" checked autocomplete="off">
+                            <label class="btn custom-btn" for="btn-check">Park</label>
+
+                            <input name="isTrail" type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
+                            <label class="btn custom-btn" for="btn-check-2">Hiking Trail</label>
+                        </div>
+
+                        <!-- Tag Selections -->
+                        <h3>Select Tags (up to 6)</h3>
+                        <input type="hidden" id="hiddenTags" name="tags">
+                        <div class="mb-4">
+                            <!-- Dropdown Menu -->
+                            <select id="tagDropdown" class="form-select" style="background-color: #FEFAE0"> </select>
+                            
+                            <!-- Tags -->
+                            <style>
+                                .tags {
+                                    height: 5vh;
+                                    width: 5vw;
+                                    background-color: #626F47;
+                                }
+                            </style>
+                            <div id="selectedTags" class="mt-3 d-flex flex-wrap gap-2"></div>
+                          
+                            <script>
+                                const max = 6; // max number of tags
+                                const selectedTags = new Set(); // make a set of selected tags
+                              
+                                fetch('data/tags.json')
+                                    .then(response => response.json())
+                                    .then(tags => {
+                                        dropdown = document.getElementById('tagDropdown');
+                                        tagContainer = document.getElementById('selectedTags');
+                              
+                                        tags.forEach(tag => {
+                                            option = document.createElement('option'); 
+                                            option.value = tag;
+                                            option.textContent = tag;
+                                            dropdown.appendChild(option);
+                                        });
+                              
+                                        dropdown.addEventListener('change', () => {
+                                            selected = dropdown.value;
+                                            if (selectedTags.size < max) {
+                                                selectedTags.add(selected);
+                              
+                                                // Create green tag box
+                                                const tagBox = document.createElement('span');
+                                                tagBox.className = 'tags';
+                                                tagBox.textContent = selected;
+                                                tagContainer.appendChild(tagBox);
+                                    
+                                                // Disable selected option
+                                                Array.from(dropdown.options).forEach(option => {
+                                                    if (option.value === selected) option.disabled = true;
+                                                });
+                              
+                                                // Reset dropdown to placeholder
+                                                dropdown.selectedIndex = 0;
+                                            }
+                                        });
+
+                                        document.getElementById('submitPark').addEventListener('submit', function(event) {
+                                            const tagsInput = document.getElementById('hiddenTags');
+                                            tagsInput.value = Array.from(selectedTags).join(',');
+                                        });
+                                    })
+                                  .catch(error => console.error('Error loading tags:', error));
+                              </script>
+                        </div>  
+
+                        <!-- Upload & Submit Buttons -->
+                        <div class="d-flex gap-4">
+                            <label for="uploadFile" class="btn btn-success">Upload Photos</label>
+                            <input type="file" name="uploadFile" id="uploadFile" class="d-none" multiple accept="image/*">
+
+                            <button type="submit" class="btn btn-success">Submit Park</button>
+                        </div>
+
+                    </form>
+                    
+                </div>
+        
+            </div>
+        </div>      
+
+        
+        <!-- Background -->
+        <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
+    </body>
+</html>

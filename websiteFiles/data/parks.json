@@ -1,0 +1,96 @@
+[
+    {
+        "id": 1,
+        "name": "Henry Church Rock Trail",
+        "location": {
+            "longitude": 41.416,
+            "latitude": -81.415
+        },
+        "tags": [
+            "waterfall",
+            "picnic area",
+            "pet friendly"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Deer Lick Cave",
+        "location": {
+            "longitude": 41.315,
+            "latitude": -81.615
+        },
+        "tags": [
+            "waterfall",
+            "picnic area",
+            "pet friendly"
+        ]
+    },
+    {
+        "id": "hello world",
+        "name": "Hello World",
+        "location": {
+            "longitude": 20.0,
+            "latitude": 10.0
+        },
+        "tags": [
+            "easy",
+            "nature center",
+            "moderate"
+        ]
+    },
+    {
+        "id": "hello world",
+        "name": "Hello World",
+        "location": {
+            "longitude": 20.0,
+            "latitude": 10.0
+        },
+        "tags": [
+            "difficult"
+        ]
+    },
+    {
+        "id": "hello world",
+        "name": "Hello World",
+        "location": {
+            "longitude": 20.0,
+            "latitude": 10.0
+        },
+        "tags": [
+            "difficult"
+        ]
+    },
+    {
+        "id": "gsdfsd",
+        "name": "gsdfsd",
+        "location": {
+            "longitude": 2.0,
+            "latitude": 1.0
+        },
+        "tags": [
+            "difficult"
+        ]
+    },
+    {
+        "id": "gsdfsd",
+        "name": "gsdfsd",
+        "location": {
+            "longitude": 2.0,
+            "latitude": 1.0
+        },
+        "tags": [
+            "difficult"
+        ]
+    },
+    {
+        "id": "gsdfsd",
+        "name": "gsdfsd",
+        "location": {
+            "longitude": 2.0,
+            "latitude": 1.0
+        },
+        "tags": [
+            ""
+        ]
+    }
+]
