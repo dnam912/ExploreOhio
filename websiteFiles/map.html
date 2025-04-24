@@ -16,6 +16,7 @@
         <title>Explore Ohio</title>
     </head>
 
+    <!-- Interactable Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <style>
@@ -26,8 +27,8 @@
         }
         .mapMenu {
             background-color: rgba(242, 246, 206, 0.8);
-            height: calc(100vh - 56px); 
-            margin-top: 56px;
+            height: calc(100vh - 65px); 
+            margin-top: 65px; /* size of bootstrap bar */
             width: 25vw;
             position: absolute;
             top: 0px;
@@ -44,8 +45,9 @@
 
         <!-- Navigation Bar bg-body-tertiary -->
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid px-4">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">Explore Ohio</a>
+            <div class="container-fluid px-6">
+                <img src="images/logo.svg" style="height: 50px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: bold">Explore Ohio</a>
                     
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -68,14 +70,12 @@
 
         <div class="mapMenu" id="mapMenu">
             <button type="button" class="btn-close btn-sm ms-2 remove-tag" aria-label="Close" onclick="closeMenu()"></button>
-            <div class="p-3" id="menuContent">
-              <!-- Park info goes here -->
-            </div>
+            <div class="p-3" id="menuContent"> </div>
         </div>
 
         <script>
             var map = L.map('map').setView([40.367,-82.996], 8); // center map on ohio
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { // get tile for leaflet
                 minZoom: 7,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
             }).addTo(map);
@@ -93,45 +93,75 @@
                         weight: 3,
                         fill: false
                     }
-                    }).addTo(map);
-                });
+                }).addTo(map);
+            });
 
-                var myIcon = L.icon({
-                    iconUrl: 'images/park.svg',
-                    iconSize: [38, 95],
-                    iconAnchor: [22, 94],
-                    popupAnchor: [-3, -76]
-                });
+            // different icons for different types of parks
+            var parkIcon = L.icon({ // icon for parks
+                iconUrl: 'images/park.svg',
+                iconSize: [38, 95]
+            });
+            var trailIcon = L.icon({ // icon for trails
+                iconUrl: 'images/trail.svg',
+                iconSize: [38, 95]
+            });
+            var bothIcon = L.icon({ // icon for both
+                iconUrl: 'images/both1.svg',
+                iconSize: [38, 95]
+            });
 
-                //var marker = L.marker([41.308,-81.602], {icon: myIcon,riseOnHover: true}).addTo(map);
-                //marker.on('click', function() {
-                //    document.getElementById('mapMenu').style.display = 'block';
-                //});
-
-                fetch('data/parks.json')
+            fetch('data/parks.json') // get all parks from park.json
                 .then(response => response.json())
                 .then(parks => {
                     parks.forEach(park => {
-                        var marker = L.marker([park.location.longitude, park.location.latitude], { icon: myIcon, riseOnHover: true }).addTo(map);
+                        let marker;
+                        // determine type of icon to use
+                        if (park.type === 'park') {
+                            marker = L.marker([park.location.latitude, park.location.longitude], { icon: parkIcon, riseOnHover: true }).addTo(map);
+                        }
+                        else if (park.type === 'trail') {
+                            marker = L.marker([park.location.latitude, park.location.longitude], { icon: trailIcon, riseOnHover: true }).addTo(map);
+                        }
+                        else {
+                            marker = L.marker([park.location.latitude, park.location.longitude], { icon: bothIcon, riseOnHover: true }).addTo(map);
+                        }
+
+                        // function to display the correct amount of filled stars
+                        function showStars(stars) {
+                            html = '';
+                            i = 5;
+                            while (i > 0) {
+                                if (stars >= i) {
+                                    html = '<img src="images/starFilled.svg" style="height: 30px"> ' + html;
+                                }
+                                else {
+                                    html = '<img src="images/starEmpty.svg" style="height: 30px"> ' + html;
+                                }
+                                i = i - 1;
+                            }
+                            return html;
+                        }
+
+                        // make menu pop up when clicking on park icon
                         marker.on('click', function() {
-                            document.getElementById('mapMenu').style.display = 'block';
+                            document.getElementById('mapMenu').style.display = 'block'; // make display block so it will be seen
+                            var tags = park.tags.map(tag => `<span class="tags">${tag}</span>`).join(' '); // prepare tags for display
 
-                            var tagsHtml = park.tags.map(tag => `<span class="badge bg-success me-1">${tag}</span>`).join(' ');
-
-                            // Build menu content dynamically
+                            // populate menu content - fix formatting later
                             var content = `
                                 <h5>${park.name}</h5>
+                                ${showStars(park.rating.value)}
                                 <img src="data/photos/${park.id}-a.jpg" class="img-fluid mb-2">
-                                <div class="mb-2">${tagsHtml}</div>
+                                ${tags}
                             `;
-
+                            
                             document.getElementById('menuContent').innerHTML = content;
                         });
                     });
                 });
 
                 function closeMenu() {
-                    document.getElementById('mapMenu').style.display = 'none';
+                    document.getElementById('mapMenu').style.display = 'none'; // close menu
                 }
         </script>
 

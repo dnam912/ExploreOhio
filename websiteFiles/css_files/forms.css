@@ -45,17 +45,17 @@ input[type="file"] { /* Hides a 'Choose File' message */
 
 /* ===== ===== ===== Checkbox Toggles ===== ===== ===== */
 .custom-btn {
-    background-color: #ffc250df;
+    background-color: #626F47;
     border-radius: 15px;
     border-color: 2px solid;
     color: white;
 }
 .custom-btn:hover {
-    background-color: #626F47 !important;
+    background-color: #ffc250df !important;
     color: white !important;
 }
 .btn-check:checked + .custom-btn {
-    background-color: #626F47 !important;
+    background-color: #ffc250df !important;
     color: white !important;
 }
 

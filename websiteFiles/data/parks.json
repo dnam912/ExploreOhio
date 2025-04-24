@@ -1,96 +1,62 @@
 [
     {
-        "id": 1,
-        "name": "Henry Church Rock Trail",
+        "id": "henrychurchrockpicnicarea",
+        "name": "Henry Church Rock Picnic Area",
         "location": {
-            "longitude": 41.416,
-            "latitude": -81.415
+            "longitude": -81.414,
+            "latitude": 41.416
         },
         "tags": [
+            "picnic area",
             "waterfall",
+            "river",
+            "forest",
+            "swimming",
+            "natural trail"
+        ],
+        "type": "both",
+        "rating": {
+            "amount": 3,
+            "weight": 10,
+            "value": 3.3333333333333335
+        }
+    },
+    {
+        "id": "kidstationplayground",
+        "name": "KidStation Playground",
+        "location": {
+            "longitude": -81.407,
+            "latitude": 41.168
+        },
+        "tags": [
             "picnic area",
             "pet friendly"
-        ]
+        ],
+        "type": "park",
+        "rating": {
+            "amount": 1,
+            "weight": 5,
+            "value": 5.0
+        }
     },
     {
-        "id": 2,
-        "name": "Deer Lick Cave",
+        "id": "buckeyetrail-northernterminus",
+        "name": "Buckeye Trail - Northern Terminus",
         "location": {
-            "longitude": 41.315,
-            "latitude": -81.615
+            "longitude": -81.284,
+            "latitude": 41.759
         },
         "tags": [
-            "waterfall",
-            "picnic area",
-            "pet friendly"
-        ]
-    },
-    {
-        "id": "hello world",
-        "name": "Hello World",
-        "location": {
-            "longitude": 20.0,
-            "latitude": 10.0
-        },
-        "tags": [
-            "easy",
-            "nature center",
-            "moderate"
-        ]
-    },
-    {
-        "id": "hello world",
-        "name": "Hello World",
-        "location": {
-            "longitude": 20.0,
-            "latitude": 10.0
-        },
-        "tags": [
-            "difficult"
-        ]
-    },
-    {
-        "id": "hello world",
-        "name": "Hello World",
-        "location": {
-            "longitude": 20.0,
-            "latitude": 10.0
-        },
-        "tags": [
-            "difficult"
-        ]
-    },
-    {
-        "id": "gsdfsd",
-        "name": "gsdfsd",
-        "location": {
-            "longitude": 2.0,
-            "latitude": 1.0
-        },
-        "tags": [
-            "difficult"
-        ]
-    },
-    {
-        "id": "gsdfsd",
-        "name": "gsdfsd",
-        "location": {
-            "longitude": 2.0,
-            "latitude": 1.0
-        },
-        "tags": [
-            "difficult"
-        ]
-    },
-    {
-        "id": "gsdfsd",
-        "name": "gsdfsd",
-        "location": {
-            "longitude": 2.0,
-            "latitude": 1.0
-        },
-        "tags": [
-            ""
-        ]
+            "beach",
+            "bird watching",
+            "swimming",
+            "buckeye trail location"
+        ],
+        "type": "trail",
+        "rating": {
+            "amount": 0,
+            "weight": 0,
+            "value": 0
+        }
     }
 ]

@@ -64,7 +64,8 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid px-6">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">Explore Ohio</a>
+                <img src="images/logo.svg" style="height: 50px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: bold">Explore Ohio</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -89,11 +90,11 @@
             
                 <!-- Left panel -->
                 <div class="col-md-6 p-5">
-                    <h2 class="text-center">Filters</h2>
+                    <h2 class="text-left" style="font-size: 3.0em; font-weight: bold">Filters</h2>
                     <form>
                         <!-- Interactive Star Rating -->
-                        <h3>Choose Minimum Star Rating</h3>
-                        <div class="col-md-6" style="padding-bottom: 5%">
+                        <h3 style="font-weight: bold">Choose Minimum Star Rating</h3>
+                        <div class="col-md-6" style="padding-bottom: 3%">
                             <div class="rating-card">
                                 <div class="star-rating animated-stars">
                                     <input type="radio" id="star5" name="rating" value="5">
@@ -112,7 +113,7 @@
                         <!-- End of Interactive Star Rating -->
 
                         <!-- Checkbox Toggle Buttons -->
-                        <h3>Type</h3><h6>(select all that apply)</h6>
+                        <h3 style="font-weight: bold">Type</h3><h6>(select all that apply)</h6>
                         <div class="d-flex gap-4 mb-5">
                             <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
                             <label class="btn custom-btn" for="btn-check">Park</label>
@@ -121,48 +122,154 @@
                             <label class="btn custom-btn" for="btn-check-2">Hiking Trail</label>
                         </div>
 
-
                         <!-- Tag Selections -->
                         <div class="mb-4">
-                            <label for="tag-input" class="form-label"><h3>Filter by Tag</h3><h6>(up to six)</h6>
-                            </label>
-                
-                            <div class="input-group">
-                                <input class="form-control" type="text" id="tag-input" placeholder="Search" style="background-color: #FEFAE0">
-
-                                <button class="btn btn-outline-secondary" type="button" id="tag-search-btn">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
+                            <h3 style="font-weight: bold">Filter by Tag</h3><h6>(up to six)</h6>
+                            <!-- Dropdown Menu -->
+                            <select id="tagDropdown" class="form-select" style="background-color: #FEFAE0;"> </select>
+                            <!-- Container to Hold Tags -->
+                            <div id="selectedTags" class="mt-3 d-flex flex-wrap gap-2"></div>
+                        
+                            <script>
+                                const selectedTags = new Set(); // make a set of selected tags
                             
-                            <!-- ===== ===== JQUERY in <div id="tag-list"> !!! ===== ===== -->
-                            <div id="tag-list" class="mt-3 d-flex flex-wrap gap-2">
-                                <span class="badge rounded-pill px-3 py-2" style="background-color: #626F47">
-                                waterfall <button type="button" class="btn-close btn-close-white btn-sm ms-2 remove-tag" aria-label="Remove"></button>
-                                </span>
-                                <span class="badge rounded-pill px-3 py-2" style="background-color: #626F47">
-                                beach <button type="button" class="btn-close btn-close-white btn-sm ms-2 remove-tag" aria-label="Remove"></button>
-                                </span>
-                            </div>
-                        </div>
+                                fetch('data/tags.json') // fetch tags from tags.json
+                                    .then(response => response.json())
+                                    .then(tags => { // tags is list of all tags
+                                        dropdown = document.getElementById('tagDropdown');
+                                        tagContainer = document.getElementById('selectedTags');
+                            
+                                        // go through each tag
+                                        tags.forEach(tag => {
+                                            option = document.createElement('option'); // create option in dropdown menu
+                                            option.value = tag;
+                                            option.textContent = tag;
+                                            dropdown.appendChild(option); // append this option to the dropdown menu
+                                        });
+                            
+                                        // listen for an option in the dropdown menu being selected
+                                        dropdown.addEventListener('change', () => {
+                                            const selected = dropdown.value;
+                                            selectedTags.add(selected); // add tag to selectedTags
+                            
+                                            // create tag box with selected tag's text
+                                            const tagBox = document.createElement('span');
+                                            tagBox.className = 'tags';
+                                            tagBox.textContent = selected;
 
+                                            // make tag unselectable via clicking on bubble
+                                            const remove = document.createElement('button');
+                                            remove.className = 'remove-tag';
+                                            remove.innerHTML = '&times;'; // centered 'x' symbol
+                                            remove.type = 'button';
+
+                                            // listen for x being clicked on
+                                            remove.addEventListener('click', () => {
+                                                event.preventDefault(); // make sure tag doesn't auto-submit form
+                                                selectedTags.delete(selected); // remove the tag from selectedTags
+                                                tagBox.remove(); // remove the tag visually
+                                                Array.from(dropdown.options).forEach(option => {
+                                                    if (option.value === selected) option.disabled = false; // re-enable option in dropdown menu
+                                                });
+                                            });
+                                                
+                                            tagBox.appendChild(remove); // add x to tagBox
+                                            tagContainer.appendChild(tagBox); // add whole tagBox to tag container
+                                    
+                                            // Disable selected option
+                                            Array.from(dropdown.options).forEach(option => {
+                                                if (option.value === selected) option.disabled = true;
+                                            });
+                                        });
+
+                                        // listens for form submission
+                                        document.getElementById('submitPark').addEventListener('submit', function(event) {
+                                            const tagsInput = document.getElementById('hiddenTags');
+                                            tagsInput.value = Array.from(selectedTags).join(','); // concatenate array into a string of all tags
+                                        });
+                                    });
+                            </script>
+                        </div> 
                         
                         <!-- Submit Random Button -->
                         <div class="d-flex align-items-center justify-content-center">
-                            <button type="submit" class="btn btn-success ms-lg-3" style="font-size: x-large">Give Me Something Random!</button>
+                            <button type="submit" class="btn btn-success ms-lg-3" style="font-size: x-large; font-weight: bold;">Give Me Something Random!</button>
                         </div>
                     </form>
                 </div>
         
                 <!-- Right panel -->
                 <div class="col-md-6 p-5 border-start custom-divider">
-                    <h2>Top Rated Parks</h2>
+                    <div class="mb-4">
+                        <h2 style="font-size: 3.0em; font-weight: bold">Top Rated Parks</h2>
+                    </div>
+                    <script>
+                        fetch('data/parks.json')
+                            .then(response => response.json())
+                            .then(parks => { 
+                                // sort parks from highest to lowest rating
+                                parks.sort((a, b) => b.rating.value - a.rating.value);
+
+                                // get the right-side container
+                                const container = document.querySelector('.col-md-6.p-5.border-start');
+
+                                // loop through all parks
+                                parks.forEach((park, i) => {
+                                    const { name, rating, id } = park; // get the name, rating, and id from park
+                                    const stars = rating.value.toFixed(1); // make sure ratings display as one decimal place 
+                                    const photoLocation = `data/photos/${id}-a.jpg`; // location of first photo for park
+
+                                    // create box
+                                    const box = document.createElement('div');
+                                    box.className = 'd-flex align-items-center mb-4 bg-light p-3 rounded';
+                                    box.style = 'background-color: #FEFAE0 !important';
+
+                                    // image
+                                    const img = document.createElement('img');
+                                    img.src = photoLocation;
+                                    img.style = 'width: 150px; height: 150px;'
+                                    img.className = 'me-3 rounded';
+
+                                    // content block
+                                    const content = document.createElement('div');
+
+                                    // title
+                                    const title = document.createElement('h5');
+                                    title.innerHTML = `<strong>${i + 1}).</strong> ${name}`;
+                                    title.style = 'font-size: x-large;'
+
+                                    // stars function
+                                    function showStars(stars) {
+                                        html = '';
+                                        i = 5;
+                                        while (i > 0) {
+                                            if (stars >= i) {
+                                                html = '<img src="images/starFilled.svg" style="height: 30px"> ' + html;
+                                            }
+                                            else {
+                                                html = '<img src="images/starEmpty.svg" style="height: 30px"> ' + html;
+                                            }
+                                            i = i - 1;
+                                        }
+                                        return html;
+                                    }
+                                    // show stars
+                                    const ratingBox = document.createElement('div');
+                                    ratingBox.innerHTML = `${showStars(park.rating.value)}`;
+
+                                    // append all elements
+                                    content.appendChild(title);
+                                    content.appendChild(ratingBox);
+                                    box.appendChild(img);
+                                    box.appendChild(content);
+                                    container.appendChild(box);
+                                });
+                            });
+                    </script>
                 </div>
-        
             </div>
         </div>      
 
-        
         <!-- Background -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
     </body>

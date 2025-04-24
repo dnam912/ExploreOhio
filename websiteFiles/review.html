@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <style>
             .star-rating {
-                                direction: rtl;
-                                display: inline-block;
-                                cursor: pointer;
+                direction: rtl;
+                display: inline-block;
+                cursor: pointer;
             }
             .star-rating input {
                 display: none;
@@ -59,7 +59,8 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid px-6">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">Explore Ohio</a>
+                <img src="images/logo.svg" style="height: 50px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: bold">Explore Ohio</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -85,18 +86,18 @@
                 <!-- Left panel -->
                 <div class="col-md-6 p-0">
                     <div class="h-100 d-flex flex-column justify-content-center align-items-center text-center">
-                        <h1 class="p-4">Review a Park</h1>
+                        <h1 class="p-4" style="font-weight: bold;">Review a Park</h1>
                     </div>
                 </div>
         
                 <!-- Right panel -->
                 <div class="col-md-6 p-5 border-start custom-divider">
                     <form id="submitReview" method="POST" action="/submit-review" enctype="multipart/form-data">
-                        <h3>Park Name</h3>
-                        <input name="parkName" class="form-control mb-5" type="text" placeholder="Park Name" style="background-color: #FEFAE0">
+                        <h3 style="font-weight: bold;">Park Name</h3>
+                        <input name="parkName" class="form-control mb-5" type="text" placeholder="Park name" style="background-color: #FEFAE0">
                         
                         <!-- Interactive Star Rating -->
-                        <h3>Rate This Park</h3>
+                        <h3 style="font-weight: bold;">Rate This Park</h3>
                         <div class="col-md-6" style="padding-bottom: 5%">
                             <div class="rating-card">
                                 <div class="star-rating animated-stars">
@@ -115,15 +116,14 @@
                         </div>
                         <!-- End of Interactive Star Rating -->
 
-                        <h3>Details on Your Experience</h3>
+                        <h3 style="font-weight: bold;">Details on Your Experience</h3>
                         <textarea name="text" class="form-control mb-4" rows="4" type="text" placeholder="Describe your experience" style="background-color: #FEFAE0;"></textarea>
                         
                         <!-- Upload & Submit Buttons -->
-                        <div class="d-flex gap-4">
-                            <label for="uploadFile" class="btn btn-success">Upload Photos</label>
-                            <input type="file" id="uploadFile" class="d-none" multiple accept="image/*">
-
-                            <button type="submit" class="btn btn-success">Submit Review</button>
+                        <div class="col-md-6" style="padding-top: 3%">
+                            <div class="d-flex gap-4">
+                                <button type="submit" class="btn btn-success" style="font-size: x-large; font-weight: bold;">Submit Review</button>
+                            </div>
                         </div>
                     </form>
                 </div>

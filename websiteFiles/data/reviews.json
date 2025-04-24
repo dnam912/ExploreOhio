@@ -1,12 +1,27 @@
 [
     {
-        "parkId": 1,
+        "parkId": "examplepark",
         "stars": 5,
         "text": "A great place to visit in the winter!"
     },
     {
-        "parkId": "name",
-        "stars": "4",
-        "text": "fdgfdgdffsdfdsfs"
+        "parkId": "henrychurchrockpicnicarea",
+        "stars": 1,
+        "text": "cool"
+    },
+    {
+        "parkId": "henrychurchrockpicnicarea",
+        "stars": 5,
+        "text": "cool"
+    },
+    {
+        "parkId": "henrychurchrockpicnicarea",
+        "stars": 4,
+        "text": "cool"
+    },
+    {
+        "parkId": "kidstationplayground",
+        "stars": 5,
+        "text": ""
     }
 ]
