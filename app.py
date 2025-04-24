@@ -10,13 +10,26 @@ app = Flask(__name__, static_folder='websiteFiles', static_url_path='') # locati
 def serveIndex():
     return send_from_directory(app.static_folder, 'index.html')
 
-@app.route('/text', methods=['POST'])
-def handle_text_submit():
-    user_input = request.form.get('user_input')
-    if user_input:
-        with open('user_inputs.txt', 'a') as f:
-            f.write(user_input + '\n')
-    return 'Input received!'
+# add new review to reviews.json
+@app.route('/submit-review', methods=['POST'])
+def makeReview():
+    parkId = request.form.get('parkName').lower().strip(' ')
+    star = int(request.form.get('star'))
+    text = request.form.get('text')
+
+    newReview = {
+        "parkId": parkId,
+        "stars" : star,
+        "text": text
+    }
+
+    with open("websiteFiles/data/reviews.json",'r+') as file:
+        fileData = json.load(file)
+        fileData.append(newReview)
+        file.seek(0)
+        json.dump(fileData, file, indent = 4)
+
+    return 'Park submitted successfully!'
 
 # add new park to parks.json
 @app.route('/submit-park', methods=['POST'])

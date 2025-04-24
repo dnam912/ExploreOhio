@@ -91,24 +91,24 @@
         
                 <!-- Right panel -->
                 <div class="col-md-6 p-5 border-start custom-divider">
-                    <form>
-                        <h3>Location</h3>
-                        <input class="form-control mb-5" type="text" placeholder="Park Name" style="background-color: #FEFAE0">
+                    <form id="submitReview" method="POST" action="/submit-review" enctype="multipart/form-data">
+                        <h3>Park Name</h3>
+                        <input name="parkName" class="form-control mb-5" type="text" placeholder="Park Name" style="background-color: #FEFAE0">
                         
                         <!-- Interactive Star Rating -->
                         <h3>Rate This Park</h3>
                         <div class="col-md-6" style="padding-bottom: 5%">
                             <div class="rating-card">
                                 <div class="star-rating animated-stars">
-                                    <input type="radio" id="star5" name="rating" value="5">
+                                    <input name="star" type="radio" id="star5" name="rating" value="5">
                                     <label for="star5" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star4" name="rating" value="4">
+                                    <input name="star" type="radio" id="star4" name="rating" value="4">
                                     <label for="star4" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star3" name="rating" value="3">
+                                    <input name="star" type="radio" id="star3" name="rating" value="3">
                                     <label for="star3" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star2" name="rating" value="2">
+                                    <input name="star" type="radio" id="star2" name="rating" value="2">
                                     <label for="star2" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star1" name="rating" value="1">
+                                    <input name="star" type="radio" id="star1" name="rating" value="1">
                                     <label for="star1" class="bi bi-star-fill"></label>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                         <!-- End of Interactive Star Rating -->
 
                         <h3>Details on Your Experience</h3>
-                        <textarea class="form-control mb-4" rows="4" type="text" placeholder="Describe your experience" style="background-color: #FEFAE0;"></textarea>
+                        <textarea name="text" class="form-control mb-4" rows="4" type="text" placeholder="Describe your experience" style="background-color: #FEFAE0;"></textarea>
                         
                         <!-- Upload & Submit Buttons -->
                         <div class="d-flex gap-4">
