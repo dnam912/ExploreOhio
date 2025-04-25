@@ -141,7 +141,8 @@
             ${address}
             <div class="mb-3">${tags}</div>
             <p><a href="#" class="problem-link">See any problems?</a></p>
-            <a href="review.html" class="btn btn-warning mb-4">Leave a Review!</a>
+            <a href="review.html?parkName=${encodeURIComponent(park.name)}" class="btn btn-warning mb-4">Leave a Review!</a>
+
             <h4>Reviews (${parkReviews.length})</h4>
             ${reviewsHTML || '<p>No reviews yet.</p>'}
         `;

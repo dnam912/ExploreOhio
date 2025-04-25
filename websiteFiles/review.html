@@ -94,8 +94,33 @@
                 <div class="col-md-6 p-5 border-start custom-divider">
                     <form id="submitReview" method="POST" action="/submit-review" enctype="multipart/form-data">
                         <h3 style="font-weight: bold;">Park Name</h3>
-                        <input name="parkName" class="form-control mb-5" type="text" placeholder="Park name" style="background-color: #FEFAE0">
+                        <select id="parkDropdown" name="parkName" class="form-select mb-5" style="background-color: #FEFAE0;">
+                            <option value="">Select a Park...</option>
+                        </select>
+                        <script>
+                            // Populate dropdown from parks.json
+                            fetch('data/parks.json')
+                                .then(response => response.json())
+                                .then(parks => {
+                                    const dropdown = document.getElementById('parkDropdown');
+                                    parks.forEach(park => {
+                                        const option = document.createElement('option');
+                                        option.value = park.name;
+                                        option.textContent = park.name;
+                                        dropdown.appendChild(option);
+                                    });
                         
+                                    // After populating, check if URL has ?parkName=
+                                    const urlParams = new URLSearchParams(window.location.search);
+                                    const parkName = urlParams.get('parkName');
+                                    if (parkName) {
+                                        dropdown.value = parkName;
+                                    }
+                                });
+                        </script>
+                        
+
+                                                
                         <!-- Interactive Star Rating -->
                         <h3 style="font-weight: bold;">Rate This Park</h3>
                         <div class="col-md-6" style="padding-bottom: 5%">

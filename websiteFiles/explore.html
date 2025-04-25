@@ -115,12 +115,13 @@
                         <!-- Checkbox Toggle Buttons -->
                         <h3 style="font-weight: bold">Type</h3><h6>(select all that apply)</h6>
                         <div class="d-flex gap-4 mb-5">
-                            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-                            <label class="btn custom-btn" for="btn-check">Park</label>
-
-                            <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
-                            <label class="btn custom-btn" for="btn-check-2">Hiking Trail</label>
+                            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" checked>
+                            <label class="btn custom-btn" for="btn-check-park">Park</label>
+                        
+                            <input type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off" checked>
+                            <label class="btn custom-btn" for="btn-check-trail">Hiking Trail</label>
                         </div>
+                        
 
                         <!-- Tag Selections -->
                         <div class="mb-4">
@@ -193,7 +194,18 @@
                         
                         <!-- Submit Random Button -->
                         <div class="d-flex align-items-center justify-content-center">
-                            <button type="submit" class="btn btn-success ms-lg-3" style="font-size: x-large; font-weight: bold;">Give Me Something Random!</button>
+                            <button id="randomParkBtn" class="btn btn-success ms-lg-3" style="font-size: x-large; font-weight: bold;">Give Me Something Random!</button>
+                            <script>
+                                document.getElementById('randomParkBtn').addEventListener('click', function(event) {
+                                    event.preventDefault(); // prevent form submit if it's inside one
+                                    fetch('data/parks.json')
+                                        .then(response => response.json())
+                                        .then(parks => {
+                                            const randomPark = parks[Math.floor(Math.random() * parks.length)];
+                                            window.location.href = `parkPage.html?id=${randomPark.id}`;
+                                        });
+                                });
+                            </script>
                         </div>
                     </form>
                 </div>
@@ -204,72 +216,113 @@
                         <h2 style="font-size: 3.0em; font-weight: bold">Top Rated Parks</h2>
                     </div>
                     <script>
+                        let allParks = []; // ← new global variable
+                    
                         fetch('data/parks.json')
                             .then(response => response.json())
-                            .then(parks => { 
-                                // sort parks from highest to lowest rating
-                                parks.sort((a, b) => b.rating.value - a.rating.value);
-
-                                // get the right-side container
-                                const container = document.querySelector('.col-md-6.p-5.border-start');
-
-                                // loop through all parks
-                                parks.forEach((park, i) => {
-                                    const { name, rating, id } = park; // get the name, rating, and id from park
-                                    const stars = rating.value.toFixed(1); // make sure ratings display as one decimal place 
-                                    const photoLocation = `data/photos/${id}-a.jpg`; // location of first photo for park
-
-                                    // create box
-                                    const box = document.createElement('div');
-                                    box.className = 'd-flex align-items-center mb-4 bg-light p-3 rounded';
-                                    box.style = 'background-color: #FEFAE0 !important; cursor: pointer;';
-                                    box.addEventListener('click', () => {
-                                        window.location.href = `parkPage.html?id=${id}`;
-                                    });
-
-
-                                    // image
-                                    const img = document.createElement('img');
-                                    img.src = photoLocation;
-                                    img.style = 'width: 150px; height: 150px;'
-                                    img.className = 'me-3 rounded';
-
-                                    // content block
-                                    const content = document.createElement('div');
-
-                                    // title
-                                    const title = document.createElement('h5');
-                                    title.innerHTML = `<strong>${i + 1}).</strong> ${name}`;
-                                    title.style = 'font-size: x-large;'
-
-                                    // stars function
-                                    function showStars(stars) {
-                                        html = '';
-                                        i = 5;
-                                        while (i > 0) {
-                                            if (stars >= i) {
-                                                html = '<img src="images/starFilled.svg" style="height: 30px"> ' + html;
-                                            }
-                                            else {
-                                                html = '<img src="images/starEmpty.svg" style="height: 30px"> ' + html;
-                                            }
-                                            i = i - 1;
-                                        }
-                                        return html;
-                                    }
-                                    // show stars
-                                    const ratingBox = document.createElement('div');
-                                    ratingBox.innerHTML = `${showStars(park.rating.value)}`;
-
-                                    // append all elements
-                                    content.appendChild(title);
-                                    content.appendChild(ratingBox);
-                                    box.appendChild(img);
-                                    box.appendChild(content);
-                                    container.appendChild(box);
-                                });
+                            .then(parks => {
+                                allParks = parks;
+                                displayParks(allParks);
                             });
+                            
+                        // Allow unchecking rating stars
+                        document.querySelectorAll('input[name="rating"]').forEach(radio => {
+                            radio.addEventListener('click', function (e) {
+                                if (this.previousChecked) {
+                                    this.checked = false;
+                                    this.previousChecked = false;
+                                } else {
+                                    // Uncheck any other radio buttons
+                                    document.querySelectorAll('input[name="rating"]').forEach(r => r.previousChecked = false);
+                                    this.previousChecked = true;
+                                }
+                                filterParks(); // update parks after clicking
+                            });
+                        });
+
+                    
+                        function displayParks(parks) {
+                            const container = document.querySelector('.col-md-6.p-5.border-start');
+                            container.innerHTML = '<div class="mb-4"><h2 style="font-size: 3.0em; font-weight: bold">Top Rated Parks</h2></div>';
+                    
+                            parks.sort((a, b) => b.rating.value - a.rating.value);
+                    
+                            parks.forEach((park, i) => {
+                                const { name, rating, id } = park;
+                                const stars = rating.value.toFixed(1);
+                                const photoLocation = `data/photos/${id}-a.jpg`;
+                    
+                                const box = document.createElement('div');
+                                box.className = 'd-flex align-items-center mb-4 bg-light p-3 rounded';
+                                box.style = 'background-color: #FEFAE0 !important; cursor: pointer;'; 
+                                box.onclick = () => { window.location.href = `parkPage.html?id=${id}`; };
+                    
+                                const img = document.createElement('img');
+                                img.src = photoLocation;
+                                img.style = 'width: 150px; height: 150px;';
+                                img.className = 'me-3 rounded';
+                    
+                                const content = document.createElement('div');
+                                const title = document.createElement('h5');
+                                title.innerHTML = `<strong>${i + 1}).</strong> ${name}`;
+                                title.style = 'font-size: x-large;'
+                    
+                                const ratingBox = document.createElement('div');
+                                ratingBox.innerHTML = showStars(rating.value);
+                    
+                                content.appendChild(title);
+                                content.appendChild(ratingBox);
+                                box.appendChild(img);
+                                box.appendChild(content);
+                                container.appendChild(box);
+                            });
+                        }
+                    
+                        function showStars(stars) {
+                            let html = '';
+                            for (let i = 1; i <= 5; i++) {
+                                html += `<img src="images/${stars >= i ? 'starFilled' : 'starEmpty'}.svg" style="height: 30px;"> `;
+                            }
+                            return html;
+                        }
                     </script>
+                    <script>
+                        function filterParks() {
+                            const selectedRating = document.querySelector('input[name="rating"]:checked')?.value || 0;
+                            const isPark = document.getElementById('btn-check').checked;
+                            const isTrail = document.getElementById('btn-check-2').checked;
+                            const selectedTags = Array.from(document.querySelectorAll('#selectedTags .tags')).map(tag => tag.childNodes[0].textContent.trim());
+                    
+                            const filtered = allParks.filter(park => {
+                                const matchesRating = park.rating.value >= selectedRating;
+                                const matchesType = (park.type === 'park' && isPark) || (park.type === 'trail' && isTrail) || (park.type === 'both' && (isPark || isTrail));
+                                const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => park.tags.includes(tag));
+                    
+                                return matchesRating && matchesType && matchesTags;
+                            });
+                    
+                            displayParks(filtered);
+                        }
+                    
+                        // Listen for changes
+                        document.querySelectorAll('input[name="rating"]').forEach(radio => {
+                            radio.addEventListener('change', filterParks);
+                        });
+                    
+                        document.getElementById('btn-check').addEventListener('change', filterParks);
+                        document.getElementById('btn-check-2').addEventListener('change', filterParks);
+                    
+                        // Tags — listen when a tag is removed or added
+                        document.getElementById('tagDropdown').addEventListener('change', () => {
+                            setTimeout(filterParks, 100); // give time for DOM to update
+                        });
+                        document.getElementById('selectedTags').addEventListener('click', (e) => {
+                            if (e.target.classList.contains('remove-tag')) {
+                                setTimeout(filterParks, 100);
+                            }
+                        });
+                    </script>
+                                        
                 </div>
             </div>
         </div>      
