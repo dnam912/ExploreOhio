@@ -144,19 +144,23 @@
 
                         // make menu pop up when clicking on park icon
                         marker.on('click', function() {
-                            document.getElementById('mapMenu').style.display = 'block'; // make display block so it will be seen
-                            var tags = park.tags.map(tag => `<span class="tags">${tag}</span>`).join(' '); // prepare tags for display
+                            document.getElementById('mapMenu').style.display = 'block';
+                            var tags = park.tags.map(tag => `<span class="tags">${tag}</span>`).join('');
 
-                            // populate menu content - fix formatting later
                             var content = `
                                 <h5>${park.name}</h5>
                                 ${showStars(park.rating.value)}
                                 <img src="data/photos/${park.id}-a.jpg" class="img-fluid mb-2">
                                 ${tags}
+                                <div class="mt-3 text-center">
+                                    <a href="parkPage.html?id=${park.id}" class="btn btn-warning" style="font-weight: bold;">View More</a>
+                                </div>
                             `;
-                            
+
                             document.getElementById('menuContent').innerHTML = content;
                         });
+
+
                     });
                 });
 

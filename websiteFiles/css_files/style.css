@@ -94,3 +94,7 @@ h1 {
     font-size: 1.2em;
     padding-left: 10px;
 }
+
+.full-height {
+    min-height: 100vh;
+}

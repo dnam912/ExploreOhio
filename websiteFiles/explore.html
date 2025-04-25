@@ -222,7 +222,11 @@
                                     // create box
                                     const box = document.createElement('div');
                                     box.className = 'd-flex align-items-center mb-4 bg-light p-3 rounded';
-                                    box.style = 'background-color: #FEFAE0 !important';
+                                    box.style = 'background-color: #FEFAE0 !important; cursor: pointer;';
+                                    box.addEventListener('click', () => {
+                                        window.location.href = `parkPage.html?id=${id}`;
+                                    });
+
 
                                     // image
                                     const img = document.createElement('img');
