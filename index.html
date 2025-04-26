@@ -13,7 +13,6 @@
 
         <!-- Include CSS -->
         <link href="css_files/style.css" rel="stylesheet"/>
-
         <title>Explore Ohio</title>
     </head>
 
@@ -21,8 +20,8 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid px-4">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">
-                    <img src="images/tree-icon.svg" alt="logo" width="30" height="30">
+                <img src="images/logo.svg" style="height: 48px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: 550;">
                     Explore Ohio
                 </a>
 
@@ -31,7 +30,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-lg-auto">
                         <a class="nav-link" href="explore.html"> Explore Top Parks </a>
                         <a class="nav-link" href="review.html"> Review a Park </a>
                         <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
@@ -46,12 +45,21 @@
         <!-- Our Goal Section -->
         <section class="our-goal-section">
             <div class="container d-flex align-items-center justify-content-center fs-2 flex-column">
-                <h1 style="font-size: 2em">Our Goal</h1>
+                <h1 style="font-size: 2em; font-weight: 550;">Our Goal</h1>
                 <p style="font-size: 24px">This is a paragraph explaining our website's goal. The light blinded him. It was dark and he thought he was the only one in the area, but the light shining in his eyes proved him wrong. It came from about 100 feet away and was shining so directly into his eyes he couldn't make out anything about the person holding the light.</p>
-                <a href="explore.html" class="btn btn-brand ms-lg-3" style="font-size: x-large">Start Exploring</a>
+                <a href="explore.html" class="btn btn-brand ms-lg-3" style="font-size: x-large; font-weight: 500;">Start Exploring!</a>
             </div>
         </section>
 
+        <!-- Hightlight the current page link -->
+        <script>
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
+            
         <!-- Background -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
     </body>

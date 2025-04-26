@@ -11,19 +11,24 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
+        <!-- Select tags -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
         <!-- Include CSS -->
         <link href="css_files/style.css" rel="stylesheet"/>
         <link href="css_files/forms.css" rel="stylesheet"/>
-
+        
         <title>Explore Ohio</title>
     </head>
+
 
     <body>
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid px-4">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">
-                    <img src="images/tree-icon.svg" alt="logo" width="30" height="30">
+                <img src="images/logo.svg" style="height: 48px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: 550;">
                     Explore Ohio
                 </a>
 
@@ -32,7 +37,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-lg-auto">
                         <a class="nav-link" href="explore.html"> Explore Top Parks </a>
                         <a class="nav-link" href="review.html"> Review a Park </a>
                         <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
@@ -44,10 +49,120 @@
         </nav>
 
 
-        <!-- Park Page -->
-    
-        
+        <!-- Panels -->
+        <div class="container-fluid push-down">
+            <div class="row min-vh-100">
+            
+                <!-- Left panel -->
+                <div class="col-md-6 p-5 scrollable-panel">
 
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <img src="images/tree-icon.svg" style="height: 48px;">
+                        <h1 class="m-0 mt-2">Bright Kent Park</h1>
+                    </div>
+                    
+                    <!-- Star Rating -->
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center gap-2" style="color: #ffc250df; font-size: 2rem;">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <h4 class="m-0 mt-2">1234 Example Road, City, State. 5678</h4>
+                      
+                      </div>
+
+                    <!-- Tag Selections -->
+                    <div class="mb-5">
+                        <h3>Tags</h3>
+                        <div id="tag-list" class="mt-3 d-flex flex-wrap gap-2">
+                            <span class="badge rounded-pill px-4 py-2" style="background-color: #626F47; font-size: large;">
+                            waterfall</span>
+                            <span class="badge rounded-pill px-4 py-2" style="background-color: #626F47; font-size: large;">
+                            beach</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Review -->
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h2 class="m-0">Review</h2>
+                        <button type="submit" class="btn btn-success" style="font-size: large;">Leave a Review!</button>
+                    </div>
+                      
+                    <!-- Review Lists -->
+                    <div class="d-flex flex-column gap-3 custom-park">
+                        
+                        <!-- Card 1 -->
+                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center" style="font-size: 1.25rem;">
+                                    <span class="me-3">5.0</span>
+                                    <span style="color: #ffc250df;">★★★★★</span>
+                                </div>
+
+                                <p>I recollect that my first exploit in squirrel-shooting was in a grove of tall walnut-trees that shades one side of the valley. I had wandered into it at noontime, when all nature is peculiarly quiet, and was startled by the roar of my own gun, as it broke the Sabbath stillness around and was prolonged and reverberated by the angry echoes.</p>
+
+                            </div>
+                            
+                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="bg-light p-3 rounded d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
+                                        <span class="me-3">5.0</span>
+                                        <span style="color: #ffc250df;">★★★★★</span>
+                                    </div>
+                                </div>
+                                <p>
+                                    I recollect that my first exploit in squirrel-shooting was in a grove of tall walnut-trees that shades one side of the valley. I had wandered into it at noontime, when all nature is peculiarly quiet, and was startled by the roar of my own gun, as it broke the Sabbath stillness around and was prolonged and reverberated by the angry echoes.
+                                </p>
+                            </div>
+                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
+                        </div>
+                        
+                        <!-- Card 3 -->
+                        <div class="bg-light p-3 rounded d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
+                                        <span class="me-3">5.0</span>
+                                        <span style="color: #ffc250df;">★★★★★</span>
+                                    </div>
+                                </div>
+                                <p>
+                                    I recollect that my first exploit in squirrel-shooting was in a grove of tall walnut-trees that shades one side of the valley.
+                                </p>
+                            </div>
+                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
+                        </div>
+  
+                    </div>
+
+                </div>
+        
+                <!-- Right panel -->
+                <div class="col-md-6 p-5 border-start custom-divider-left scrollable-panel">
+
+                    
+        
+            </div>
+        </div>      
+
+
+        <!-- Hightlight the current page link -->
+        <script>
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
+        
         <!-- Background -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
     </body>

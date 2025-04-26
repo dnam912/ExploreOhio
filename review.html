@@ -59,8 +59,8 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid px-4">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">
-                    <img src="images/tree-icon.svg" alt="logo" width="30" height="30">
+                <img src="images/logo.svg" style="height: 48px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: 550;">
                     Explore Ohio
                 </a>
 
@@ -69,7 +69,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-lg-auto">
                         <a class="nav-link" href="explore.html"> Explore Top Parks </a>
                         <a class="nav-link" href="review.html"> Review a Park </a>
                         <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
@@ -135,6 +135,14 @@
             </div>
         </div>      
 
+        <!-- Hightlight the current page link -->
+        <script>
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
         
         <!-- Background -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">

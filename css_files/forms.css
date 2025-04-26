@@ -10,8 +10,13 @@
 }
 
 /* ===== ===== ===== Left Panel ===== ===== ===== */
-.p-4 { /* h1 Submit New Park*/
+.p-4 { /* Title on the left panel*/
     color: white;
+    font-weight: 550;
+}
+
+form {
+    padding-top: 1rem;
 }
 
 /* ===== ===== ===== Right Panel ===== ===== ===== */
@@ -19,17 +24,34 @@
     background-color: #A4B465;
 }
 
-form {
-    padding-top: 1em;
+.custom-park {
+    padding-top: 1rem;
 }
 
-/* ===== ===== ===== Borderline in the Middle of Panels ===== ===== ===== */
-.custom-divider-left {
-    border-left: 1em solid #FEFAE0 !important;
+.scrollable-panel {
+    overflow-y: auto;
+    padding-right: 1rem;
 }
 
-.custom-divider-top {
-    border-top: 1em solid #FEFAE0 !important;
+/* ===== ===== ===== Park Lists ===== ===== ===== */
+.bg-light {
+    background-color: #fdf8e4 !important;
+}
+#parks {
+    color: #626F47;
+    font-size: 1.4rem;
+}
+.me-2 {
+    color: #626F47; /* Ratings */
+}
+
+/* ===== ===== ===== Borderline in the middle of panels ===== ===== ===== */
+.custom-divider-left { /* Explore, review, submit, and park pages */
+    border-left: 1rem solid #FEFAE0 !important;
+}
+
+.custom-divider-top { /* Handy resource page */
+    border-top: 1rem solid #FEFAE0 !important;
 }
 
 /* ===== ===== ===== Buttons ===== ===== ===== */
@@ -71,4 +93,6 @@ input[type="file"] { /* Hides a 'Choose File' message */
 /* ===== ===== ===== Texts ===== ===== ===== */
 h2, h3, h6 {
     color: white;
+    font-weight: 600;
 }
+
