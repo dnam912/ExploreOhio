@@ -1,0 +1,62 @@
+[
+    {
+        "id": "henrychurchrockpicnicarea",
+        "name": "Henry Church Rock Picnic Area",
+        "location": {
+            "longitude": -81.414,
+            "latitude": 41.416
+        },
+        "tags": [
+            "picnic area",
+            "waterfall",
+            "river",
+            "forest",
+            "swimming",
+            "natural trail"
+        ],
+        "type": "both",
+        "rating": {
+            "amount": 3,
+            "weight": 10,
+            "value": 3.3333333333333335
+        }
+    },
+    {
+        "id": "kidstationplayground",
+        "name": "KidStation Playground",
+        "location": {
+            "longitude": -81.407,
+            "latitude": 41.168
+        },
+        "tags": [
+            "picnic area",
+            "pet friendly"
+        ],
+        "type": "park",
+        "rating": {
+            "amount": 1,
+            "weight": 5,
+            "value": 5.0
+        }
+    },
+    {
+        "id": "buckeyetrail-northernterminus",
+        "name": "Buckeye Trail - Northern Terminus",
+        "location": {
+            "longitude": -81.284,
+            "latitude": 41.759
+        },
+        "tags": [
+            "beach",
+            "bird watching",
+            "swimming",
+            "buckeye trail location"
+        ],
+        "type": "trail",
+        "rating": {
+            "amount": 0,
+            "weight": 0,
+            "value": 0
+        }
+    }
+]
