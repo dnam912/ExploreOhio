@@ -22,8 +22,8 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid px-4">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.5em">
-                    <img src="images/tree-icon.svg" alt="logo" width="30" height="30">
+                <img src="images/logo.svg" style="height: 48px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: 550;">
                     Explore Ohio
                 </a>
 
@@ -32,7 +32,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-lg-auto">
                         <a class="nav-link" href="explore.html"> Explore Top Parks </a>
                         <a class="nav-link" href="review.html"> Review a Park </a>
                         <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
@@ -62,7 +62,7 @@
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="text-center p-4 h-100"
                                 style="background-color: #FEFAE0">
-                                    <h4 class="fw-bold mb-3" style="color: #626F47">Hiking Safety</h4>
+                                    <h3 class="fw-bold mb-3" style="color: #626F47">Hiking Safety</h3>
 
                                     <!-- SVG -->
                                     <div class="mb-3" style="width: 150px; height: 150px; margin: 0 auto;">
@@ -77,7 +77,7 @@
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="text-center p-4 h-100"
                                 style="background-color: #FEFAE0">
-                                    <h4 class="fw-bold mb-3"  style="color: #626F47">Biking Safety</h4>
+                                    <h3 class="fw-bold mb-3"  style="color: #626F47">Biking Safety</h3>
 
                                     <!-- SVG -->
                                     <div class="mb-3" style="width: 150px; height: 150px; margin: 0 auto;">
@@ -92,7 +92,7 @@
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="text-center p-4 h-100"
                                 style="background-color: #FEFAE0">
-                                    <h4 class="fw-bold mb-3" style="color: #626F47">Camping</h4>
+                                    <h3 class="fw-bold mb-3" style="color: #626F47">Camping</h3>
 
                                     <!-- SVG -->
                                     <div class="mb-3" style="width: 150px; height: 150px; margin: 0 auto;">
@@ -106,7 +106,7 @@
                             <!-- Section 4 -->
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="text-center p-4 h-100" style="background-color: #FEFAE0">
-                                    <h4 class="fw-bold mb-4" style="color: #626F47">Swimming</h4>
+                                    <h3 class="fw-bold mb-4" style="color: #626F47">Swimming</h3>
 
                                     <!-- SVG -->
                                     <div class="mb-3" style="width: 150px; height: 150px; margin: 0 auto;">
@@ -123,6 +123,15 @@
 
             </div>
         </div>
+
+        <!-- Hightlight the current page link -->
+        <script>
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
 
         <!-- Background image behind everything -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Background" />
