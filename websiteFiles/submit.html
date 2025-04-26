@@ -18,6 +18,7 @@
         <!-- Include CSS -->
         <link href="css_files/style.css" rel="stylesheet"/>
         <link href="css_files/forms.css" rel="stylesheet"/>
+        <link href="css_files/functionality.css" rel="stylesheet"/>
         
         <title>Explore Ohio</title>
     </head>
@@ -63,56 +64,104 @@
         
                 <!-- Right panel -->
                 <div class="col-md-6 p-5 border-start custom-divider-left">
-                    <form>
+                    <form id="submitPark" method="POST" action="/submit-park" enctype="multipart/form-data">
                         <h3>Park Name</h3>
-                        <input class="form-control mb-4" type="text" placeholder="Park Name" style="background-color: #FEFAE0">
+                        <input name="parkName" class="form-control mb-4" type="text" placeholder="Park Name" id="parkName" style="background-color: #FEFAE0">
 
-                        <h3>Address</h3>
-                        <input class="form-control mb-5" type="text" placeholder="Address" style="background-color: #FEFAE0">
+                        <h3>Latitude, Longitude</h3>
+                        <input name="latLong" class="form-control mb-5" type="text" placeholder="Latitude, Longitude" id="latLong" style="background-color: #FEFAE0">
                 
                         
                         <!-- Checkbox Toggle Buttons -->
                         <h3>Is this a Park or Hiking Trail?</h3><h6>(select all that apply)</h6>
                         <div class="d-flex gap-4 mb-5">
-                            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                            <input name="isPark" type="checkbox" class="btn-check" id="btn-check" checked autocomplete="off">
                             <label class="btn custom-btn" for="btn-check">Park</label>
 
-                            <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
+                            <input name="isTrail" type="checkbox" class="btn-check" id="btn-check-2">
                             <label class="btn custom-btn" for="btn-check-2">Hiking Trail</label>
                         </div>
 
 
                         <!-- Tag Selections -->
+                        <h3>Select Tags</h3><h6>(up to six)</h6>
+                        <input type="hidden" id="hiddenTags" name="tags">
                         <div class="mb-4">
-                            <label for="tag-input" class="form-label"><h3>Select Tags</h3><h6>(up to six)</h6>
-                            </label>
-                
-                            <div class="input-group">
-                                <input class="form-control" type="text" id="tag-input" placeholder="Search" style="background-color: #FEFAE0">
+                            <!-- Dropdown Menu -->
+                            <select id="tagDropdown" class="form-select" style="background-color: #FEFAE0;"> </select>
+                            <!-- Container to Hold Tags -->
+                            <div id="selectedTags" class="mt-3 d-flex flex-wrap gap-2"></div>
 
-                                <button class="btn btn-outline-secondary" type="button" id="tag-search-btn">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
-                            
-                            <!-- ===== ===== JQUERY in <div id="tag-list"> !!! ===== ===== -->
-                            <div id="tag-list" class="mt-3 d-flex flex-wrap gap-2">
-                                <span class="badge rounded-pill px-3 py-2" style="background-color: #626F47">
-                                waterfall <button type="button" class="btn-close btn-close-white btn-sm ms-2 remove-tag" aria-label="Remove"></button>
-                                </span>
-                                <span class="badge rounded-pill px-3 py-2" style="background-color: #626F47">
-                                beach <button type="button" class="btn-close btn-close-white btn-sm ms-2 remove-tag" aria-label="Remove"></button>
-                                </span>
-                            </div>
-                        </div>                          
+                            <script>
+                                const max = 6; // max number of tags
+                                const selectedTags = new Set(); // make a set of selected tags
+                              
+                                fetch('data/tags.json') // fetch tags from tags.json
+                                    .then(response => response.json())
+                                    .then(tags => { // tags is list of all tags
+                                        dropdown = document.getElementById('tagDropdown');
+                                        tagContainer = document.getElementById('selectedTags');
+                              
+                                        // go through each tag
+                                        tags.forEach(tag => {
+                                            option = document.createElement('option'); // create option in dropdown menu
+                                            option.value = tag;
+                                            option.textContent = tag;
+                                            dropdown.appendChild(option); // append this option to the dropdown menu
+                                        });
+                              
+                                        // listen for an option in the dropdown menu being selected
+                                        dropdown.addEventListener('change', () => {
+                                            const selected = dropdown.value;
+                                            if (selectedTags.size < max) { // make sure only 6 tags can be selected
+                                                selectedTags.add(selected); // add tag to selectedTags
+                              
+                                                // create tag box with selected tag's text
+                                                const tagBox = document.createElement('span');
+                                                tagBox.className = 'tags';
+                                                tagBox.textContent = selected;
+
+                                                // make tag unselectable via clicking on bubble
+                                                const remove = document.createElement('button');
+                                                remove.className = 'remove-tag';
+                                                remove.innerHTML = '&times;'; // centered 'x' symbol
+                                                remove.type = 'button';
+
+                                                // listen for x being clicked on
+                                                remove.addEventListener('click', () => {
+                                                    event.preventDefault(); // make sure tag doesn't auto-submit form
+                                                    selectedTags.delete(selected); // remove the tag from selectedTags
+                                                    tagBox.remove(); // remove the tag visually
+                                                    Array.from(dropdown.options).forEach(option => {
+                                                        if (option.value === selected) option.disabled = false; // re-enable option in dropdown menu
+                                                    });
+                                                });
+                                                
+                                                tagBox.appendChild(remove); // add x to tagBox
+                                                tagContainer.appendChild(tagBox); // add whole tagBox to tag container
+                                    
+                                                // Disable selected option
+                                                Array.from(dropdown.options).forEach(option => {
+                                                    if (option.value === selected) option.disabled = true;
+                                                });
+                                            }
+                                        });
+
+                                        // listens for form submission
+                                        document.getElementById('submitPark').addEventListener('submit', function(event) {
+                                            const tagsInput = document.getElementById('hiddenTags');
+                                            tagsInput.value = Array.from(selectedTags).join(','); // concatenate array into a string of all tags
+                                        });
+                                    });
+                            </script>
 
                         
                         <!-- Upload & Submit Buttons -->
                         <div class="d-flex gap-4">
-                            <label for="uploadFile" class="btn btn-success">Upload Photos</label>
+                            <label for="uploadFile" style="font-size: large; font-weight: 550" class="btn btn-success">Upload Photos</label>
                             <input type="file" id="uploadFile" class="d-none" multiple accept="image/*">
 
-                            <button type="submit" class="btn btn-success">Submit Park</button>
+                            <button type="submit" style="font-size: large; font-weight: 550" class="btn btn-success">Submit Park</button>
                         </div>
 
                     </form>
