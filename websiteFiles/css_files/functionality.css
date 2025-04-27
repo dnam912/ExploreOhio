@@ -10,8 +10,6 @@
     display: flex;
     padding: 15px;
     font-weight: bold;
-
-    margin-block-end: 1.5rem; /* Added */
 }
 
 .remove-tag {

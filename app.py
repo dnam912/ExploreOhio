@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory, redirect
 import json
 import os
 from werkzeug.utils import secure_filename
@@ -104,7 +104,7 @@ def addPark():
         filename = f"{id}-{chr(97+i)}{ext}" # give the photos names like _-a.jpg, _-b.jpg, etc. where _ is the park id
         image.save(os.path.join(imageFolder, secure_filename(filename)))
 
-    return 'Park submitted successfully!'
+    return redirect(f'/parkPage.html?id={id}')
 
 
 if __name__ == '__main__':

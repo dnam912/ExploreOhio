@@ -58,5 +58,25 @@
             "weight": 0,
             "value": 0
         }
+    },
+    {
+        "id": "nelsonledges",
+        "name": "Nelson Ledges",
+        "location": {
+            "longitude": -81.035,
+            "latitude": 41.319
+        },
+        "tags": [
+            "waterfall",
+            "cave",
+            "difficult",
+            "natural trail"
+        ],
+        "type": "trail",
+        "rating": {
+            "amount": 0,
+            "weight": 0,
+            "value": 0
+        }
     }
 ]

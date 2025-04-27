@@ -19,9 +19,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <style>
             .star-rating {
-                                direction: rtl;
-                                display: inline-block;
-                                cursor: pointer;
+                direction: rtl;
+                display: inline-block;
+                cursor: pointer;
             }
             .star-rating input {
                 display: none;
@@ -56,6 +56,7 @@
         <!-- Include CSS -->
         <link href="css_files/style.css" rel="stylesheet"/>
         <link href="css_files/forms.css" rel="stylesheet"/>
+        <link href="css_files/functionality.css" rel="stylesheet"/>
         <title>Explore Ohio</title>
     </head>
 
@@ -63,16 +64,18 @@
     <body>
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid px-6">
-                <img src="images/logo.svg" style="height: 50px">
-                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: bold">Explore Ohio</a>
+            <div class="container-fluid px-4">
+                <img src="images/logo.svg" style="height: 48px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: 550;">
+                    Explore Ohio
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-lg-auto">
                         <a class="nav-link" href="explore.html"> Explore Top Parks </a>
                         <a class="nav-link" href="review.html"> Review a Park </a>
                         <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
@@ -127,7 +130,9 @@
                         <div class="mb-4">
                             <h3 style="font-weight: bold">Filter by Tag</h3><h6>(up to six)</h6>
                             <!-- Dropdown Menu -->
-                            <select id="tagDropdown" class="form-select" style="background-color: #FEFAE0;"> </select>
+                            <select id="tagDropdown" class="form-select" style="background-color: #FEFAE0;">
+                                <option value="">Select Tags...</option>
+                            </select>
                             <!-- Container to Hold Tags -->
                             <div id="selectedTags" class="mt-3 d-flex flex-wrap gap-2"></div>
                         
@@ -211,7 +216,7 @@
                 </div>
         
                 <!-- Right panel -->
-                <div class="col-md-6 p-5 border-start custom-divider">
+                <div class="col-md-6 p-5 border-start custom-divider-left scrollable-panel">
                     <div class="mb-4">
                         <h2 style="font-size: 3.0em; font-weight: bold">Top Rated Parks</h2>
                     </div>
@@ -248,32 +253,52 @@
                             parks.sort((a, b) => b.rating.value - a.rating.value);
                     
                             parks.forEach((park, i) => {
-                                const { name, rating, id } = park;
+                                const { name, rating, id, type } = park;
                                 const stars = rating.value.toFixed(1);
                                 const photoLocation = `data/photos/${id}-a.jpg`;
                     
                                 const box = document.createElement('div');
-                                box.className = 'd-flex align-items-center mb-4 bg-light p-3 rounded';
-                                box.style = 'background-color: #FEFAE0 !important; cursor: pointer;'; 
+                                box.className = 'd-flex mb-4 bg-light p-3 rounded';
+                                box.style = 'background-color: #FEFAE0 !important; cursor: pointer; align-items: flex-start; position: relative;'; 
                                 box.onclick = () => { window.location.href = `parkPage.html?id=${id}`; };
                     
                                 const img = document.createElement('img');
                                 img.src = photoLocation;
-                                img.style = 'width: 150px; height: 150px;';
+                                img.style = 'width: 150px; height: 150px; object-fit: cover;';
                                 img.className = 'me-3 rounded';
                     
                                 const content = document.createElement('div');
                                 const title = document.createElement('h5');
-                                title.innerHTML = `<strong>${i + 1}).</strong> ${name}`;
-                                title.style = 'font-size: x-large;'
+                                title.innerHTML = `<strong>${i + 1}). ${name}</strong>`;
+                                title.style = 'font-size: xx-large; color: #626F47'
                     
                                 const ratingBox = document.createElement('div');
-                                ratingBox.innerHTML = showStars(rating.value);
+                                ratingBox.innerHTML = `
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div style="font-size: xx-large; color: #626F47; margin-right: 5px">${stars}</div>
+                                        <div style="display: flex;">${showStars(rating.value)}</div>
+                                    </div>
+                                `;
+                                ratingBox.style = 'position: absolute; bottom: 10px; right: 10px; align-items: center;';
                     
                                 content.appendChild(title);
                                 content.appendChild(ratingBox);
+
+                                const parkIcon = document.createElement('img');
+                                if (park.type === 'both') {
+                                    parkIcon.src = 'images/both1.svg';
+                                }
+                                else if (park.type === 'park') {
+                                    parkIcon.src = 'images/park.svg';
+                                }
+                                else {
+                                    parkIcon.src = 'images/trail.svg';
+                                }
+                                parkIcon.style = 'width: 40px; margin-left: auto; margin-top: 0;'; 
+
                                 box.appendChild(img);
                                 box.appendChild(content);
+                                box.appendChild(parkIcon); 
                                 container.appendChild(box);
                             });
                         }
@@ -281,7 +306,7 @@
                         function showStars(stars) {
                             let html = '';
                             for (let i = 1; i <= 5; i++) {
-                                html += `<img src="images/${stars >= i ? 'starFilled' : 'starEmpty'}.svg" style="height: 30px;"> `;
+                                html += `<img src="images/${stars >= i ? 'starFilled' : 'starEmpty'}.svg" style="height: 40px;"> `;
                             }
                             return html;
                         }
