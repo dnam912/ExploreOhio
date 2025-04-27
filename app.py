@@ -51,7 +51,7 @@ def makeReview():
             json.dump(fileData, file, indent = 4) # turn back into JSON
             file.truncate() # make sure data is updated
 
-    return 'Review submitted successfully!'
+    return redirect(f'/parkPage.html?id={parkId}')
 
 
 # add new park to parks.json

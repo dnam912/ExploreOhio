@@ -27,7 +27,7 @@
     grid-template-columns: repeat(3, minmax(80px, 1fr)); /* 3개 */
     gap: 10px;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 .tags-grid span {

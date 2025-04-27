@@ -57,6 +57,7 @@ form {
 /* ===== ===== ===== Buttons ===== ===== ===== */
 .btn-success {
     background-color: #ffc250df;
+    border-radius: 10px;
     border: none;
     color: white;
 }
@@ -76,18 +77,22 @@ input[type="file"] { /* Hides a 'Choose File' message */
 
 /* ===== ===== ===== Checkbox Toggles ===== ===== ===== */
 .custom-btn {
-    background-color: #ffc250df;
-    border-radius: 15px;
-    border-color: 2px solid;
+    background-color: #626F47;
+    border-radius: 10px;
+    border: 3px solid #626F47;
     color: white;
 }
 .custom-btn:hover {
-    background-color: #626F47 !important;
+    background-color: #ffc250df !important;
+    border: 3px solid #626F47 !important;
     color: white !important;
+    font-weight: bold;
 }
 .btn-check:checked + .custom-btn {
-    background-color: #626F47 !important;
+    background-color: #ffc250df !important;
+    border: 3px solid #626F47 !important;
     color: white !important;
+    font-weight: bold;
 }
 
 /* ===== ===== ===== Texts ===== ===== ===== */
@@ -95,4 +100,3 @@ h2, h3, h6 {
     color: white;
     font-weight: 600;
 }
-

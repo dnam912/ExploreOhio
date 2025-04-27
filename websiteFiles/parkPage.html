@@ -1,185 +1,175 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        
+        <!-- Responsive meta tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <!-- Include via CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
-    <!-- CSS -->
-    <link href="css_files/style.css" rel="stylesheet">
-    <link href="css_files/forms.css" rel="stylesheet">
-    <link href="css_files/functionality.css" rel="stylesheet">
-    <title>Explore Ohio</title>
-
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow-x: hidden; 
-            background-color: #A4B465;
-        }
-
-        #parkInfo .col-md-6,
-        #parkInfo .col-md-5 {
-            background-color: #A4B465;
-        }
-
-        .custom-divider {
-            background-color: #FEFAE0;
-            min-height: 100vh;
-        }
+        <!-- Select tags -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
-        .full-height {
-            height: 100%;
-        }
+        <!-- Include CSS -->
+        <link href="css_files/style.css" rel="stylesheet"/>
+        <link href="css_files/forms.css" rel="stylesheet"/>
+        <link href="css_files/functionality.css" rel="stylesheet"/>
+        
+        <title>Explore Ohio</title>
+    </head>
 
-        .green-panel {
-            background-color: #A4B465;
-            padding: 40px;
-        }
 
-        .cream-divider {
-            background-color: #FEFAE0;
-            width: 1em;
-            padding: 0;
-        }
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid px-4">
+                <img src="images/logo.svg" style="height: 48px">
+                <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: 550;">
+                    Explore Ohio
+                </a>
 
-        h2, a.problem-link {
-            color: white;
-        }
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        .problem-link {
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .problem-link:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid px-6">
-            <img src="images/logo.svg" style="height: 50px">
-            <a class="navbar-brand" href="index.html" style="font-size: 1.75em; font-weight: bold">Explore Ohio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="explore.html"> Explore Top Parks </a>
-                    <a class="nav-link" href="review.html"> Review a Park </a>
-                    <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
-                    <a class="nav-link" href="handy.html"> Handy Resources </a>
-                    <a class="nav-link" href="map.html"> Interactive Map</a>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-lg-auto">
+                        <a class="nav-link" href="explore.html"> Explore Top Parks </a>
+                        <a class="nav-link" href="review.html"> Review a Park </a>
+                        <a class="nav-link" href="submit.html"> Submit Your Own Park </a>
+                        <a class="nav-link" href="handy.html"> Handy Resources </a>
+                        <a class="nav-link" href="map.html"> Interactive Map</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Full-height Container -->
-    <div class="container-fluid h-100 px-0">
-        <div id="parkInfo" class="row full-height align-items-stretch" style="padding-top: 65px;"></div>
-    </div>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const parkId = urlParams.get('id');
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const parkId = urlParams.get('id');
-
-        const parkInfoContainer = document.getElementById('parkInfo');
-
-        function showStars(stars) {
-            let html = '';
-            for (let i = 1; i <= 5; i++) {
-                html += `<img src="images/${stars >= i ? 'starFilled' : 'starEmpty'}.svg" style="height: 30px; margin-right: 5px;"> `;
+            function showStars(stars) {
+                let html = '';
+                for (let i = 1; i <= 5; i++) {
+                    html += `<img src="images/${stars >= i ? 'starFilled' : 'starEmpty'}.svg" style="height: 30px; margin-right: 5px;"> `;
+                }
+                return html;
             }
-            return html;
-        }
+        </script>
 
-        Promise.all([
-            fetch('data/parks.json').then(res => res.json()),
-            fetch('data/reviews.json').then(res => res.json())
-        ]).then(([parks, reviews]) => {
-            const park = parks.find(p => p.id === parkId);
-            const parkReviews = reviews.filter(r => r.parkId === parkId);
 
-            if (!park) {
-                parkInfoContainer.innerHTML = '<p>Park not found.</p>';
-                return;
-            }
+        <!-- Panels -->
+        <div class="container-fluid push-down">
+            <div class="row min-vh-100">
+            
+                <!-- Left panel -->
+                <div class="col-md-6 p-5 scrollable-panel"></div>
+                <!-- Right panel -->
+                <div class="col-md-6 p-5 border-start custom-divider-left scrollable-panel"> </div>
 
-            // LEFT: Info and reviews
-            const infoCol = document.createElement('div');
-            infoCol.className = 'col-md-6 green-panel';
-            infoCol.style.height = '100%';
+                    <script>
+                        Promise.all([fetch('data/parks.json').then(res => res.json()),fetch('data/reviews.json').then(res => res.json())]).
+                            then(([parks, reviews]) => {
+                                const park = parks.find(p => p.id === parkId);
+                                const parkReviews = reviews.filter(r => r.parkId === parkId);
 
-            const title = `<h2 class="text-left" style="font-size: 3.0em; font-weight: bold"> ${park.name} </h2>`;
-            const stars = `
-                <div class="mb-2 d-flex align-items-center">
-                    <div class="d-flex">
-                        ${showStars(park.rating.value)}
-                    </div>
-                    <div class="ms-2" style="font-size: 1.5em; line-height: 1; display: flex; align-items: center; color: white;">
-                        ${park.rating.value.toFixed(1)}
-                    </div>
-                </div>
-            `;
-            const address = `<p class="text-muted"><i class="bi bi-geo-alt-fill"></i>  ${park.location.latitude}, ${park.location.longitude}</p>`;
+                                // PARK TITLE
+                                const parkTitle = document.createElement('div');
+                                parkTitle.className = 'd-flex align-items-start gap-3';
 
-            const tags = `
-                <div class="tags-container mb-3">
-                    ${park.tags.map(tag => `<span class="tags me-2 mb-2">${tag}</span>`).join('')}
-                </div>
-            `;
+                                const parkIcon = document.createElement('img');
+                                if (park.type === 'both') {
+                                    parkIcon.src = 'images/both.svg';
+                                }
+                                else if (park.type === 'trail') {
+                                    parkIcon.src = 'images/trail.svg';
+                                }
+                                else {
+                                    parkIcon.src = 'images/park.svg';
+                                }
+                                parkIcon.style = 'height: 45px; width: 45px;';
 
-            const reviewsHTML = parkReviews.map(r => `
-                <div class="bg-light p-3 my-2 rounded">
-                    ${showStars(r.stars)}
-                    <p class="mt-2">${r.text}</p>
-                </div>
-            `).join('');
+                                const parkName = document.createElement('h1');
+                                parkName.innerHTML = `${park.name}`
+                                parkTitle.appendChild(parkIcon);
+                                parkTitle.appendChild(parkName);  
 
-            infoCol.innerHTML = `
-                ${title}
-                ${stars}
-                ${address}
-                <div class="mb-3">${tags}</div>
+                                // PARK STARS
+                                const stars = document.createElement('div');
+                                stars.className = 'd-flex align-items-center gap-1 mb-4'
+                                stars.innerHTML = `
+                                    <div style="font-size: x-large; color: white; margin-right: 30px;"> 
+                                        ${showStars(park.rating.value)} (${park.rating.value.toFixed(1)})
+                                    </div>
+                                    <i class="bi bi-geo-alt-fill" style="color: #FEFAE0; font-size: x-large; margin-left: 10px;">
+                                        ${park.location.latitude}, ${park.location.longitude}
+                                    </i> 
+                                `
 
-                <h4>Reviews (${parkReviews.length})</h4>
-                <a href="review.html?parkName=${encodeURIComponent(park.name)}" class="btn btn-warning mb-4">Leave a Review!</a>
-                ${reviewsHTML || '<p>No reviews yet.</p>'}
-            `;
+                                // PARK TAGS
+                                const tags = document.createElement('div');
+                                tags.innerHTML = `
+                                    <h3>Tags</h3>
+                                    <div class="mt-3 d-flex flex-wrap gap-2 mb-4">
+                                        ${park.tags.map(tag => `<span class="tags">${tag}</span>`).join('')}
+                                    </div>
+                                `
 
-            // MIDDLE: Divider bar
-            const divider = document.createElement('div');
-            divider.className = 'col-md-1 cream-divider';
-            divider.style.height = '100%';
+                                // PARK REVIEWS
+                                const reviewsTitle = document.createElement('div');
+                                reviewsTitle.className = 'd-flex align-items-baseline gap-3 mb-4';
+                                reviewsTitle.innerHTML = `
+                                    <h3 style="margin-bottom: 0;">Reviews (${parkReviews.length})</h3>
+                                    <a href="review.html?parkName=${encodeURIComponent(park.name)}" class="btn btn-success" style="font-size: x-large; font-weight: bold; margin-left: auto;">Leave a Review!</a>
+                                `;
+                                const reviewSection = document.createElement('div');
+                                reviewSection.innerHTML = parkReviews.map(r => `
+                                    <div class="bg-light p-3 my-2 rounded mb-4">
+                                        ${showStars(r.stars)}
+                                        <p class="mt-4" style="font-size: large;">${r.text}</p>
+                                    </div>
+                                `).join('');
 
-            // RIGHT: Photos
-            const imageCol = document.createElement('div');
-            imageCol.className = 'col-md-5 green-panel';
-            imageCol.style.height = '100%';
-            const photoList = ['a', 'b', 'c'].map(letter => {
-                const photoPath = `data/photos/${park.id}-${letter}.jpg`;
-                return `<img src="${photoPath}" class="img-fluid mb-3 rounded shadow" style="max-width: 100%; height: auto;" onerror="this.style.display='none'">`;
-            }).join('');
-            imageCol.innerHTML = photoList;
+                                document.querySelector('.col-md-6').appendChild(parkTitle);  
+                                document.querySelector('.col-md-6').appendChild(stars);  
+                                document.querySelector('.col-md-6').appendChild(tags);  
+                                document.querySelector('.col-md-6').appendChild(reviewsTitle); 
+                                document.querySelector('.col-md-6').appendChild(reviewSection);  
 
-            parkInfoContainer.appendChild(infoCol);
-            parkInfoContainer.appendChild(divider);
-            parkInfoContainer.appendChild(imageCol);
-        });
-    </script>
+                                const images = document.createElement('div');
+                                const photoList = ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map(letter => {
+                                    const photoPath = `data/photos/${park.id}-${letter}.jpg`;
+                                    return `<img src="${photoPath}" class="img-fluid mb-3 rounded" style="max-width: 100%; height: auto; border: 5px solid #fdf8e4;" onerror="this.style.display='none'">`;
+                                }).join('');
+                                images.innerHTML = `
+                                    <div class = "d-flex flex-column align-items-center text-center">
+                                        <h1 style="margin-bottom: 20px;"> Gallary </h1>
+                                        ${photoList}
+                                    </div>
+                                `
+                                
+                                document.querySelector('.col-md-6.border-start').appendChild(images);
+                            });
+                    </script>
+            </div>
+        </div>      
 
-</body>
+
+        <!-- Hightlight the current page link -->
+        <script>
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
+        
+        <!-- Background -->
+        <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
+    </body>
 </html>

@@ -16,9 +16,9 @@
         ],
         "type": "both",
         "rating": {
-            "amount": 3,
-            "weight": 10,
-            "value": 3.3333333333333335
+            "amount": 1,
+            "weight": 5,
+            "value": 5.0
         }
     },
     {
@@ -34,9 +34,9 @@
         ],
         "type": "park",
         "rating": {
-            "amount": 1,
-            "weight": 5,
-            "value": 5.0
+            "amount": 2,
+            "weight": 8,
+            "value": 4.0
         }
     },
     {
@@ -54,9 +54,9 @@
         ],
         "type": "trail",
         "rating": {
-            "amount": 0,
-            "weight": 0,
-            "value": 0
+            "amount": 1,
+            "weight": 5,
+            "value": 5.0
         }
     },
     {
@@ -73,6 +73,27 @@
             "natural trail"
         ],
         "type": "trail",
+        "rating": {
+            "amount": 0,
+            "weight": 0,
+            "value": 0
+        }
+    },
+    {
+        "id": "brandywinefalls",
+        "name": "Brandywine Falls",
+        "location": {
+            "longitude": -81.539,
+            "latitude": 41.276
+        },
+        "tags": [
+            "waterfall",
+            "picnic area",
+            "easy",
+            "buckeye trail location",
+            "paved trail"
+        ],
+        "type": "both",
         "rating": {
             "amount": 0,
             "weight": 0,

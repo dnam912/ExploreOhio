@@ -6,22 +6,22 @@
     },
     {
         "parkId": "henrychurchrockpicnicarea",
-        "stars": 1,
-        "text": "cool"
-    },
-    {
-        "parkId": "henrychurchrockpicnicarea",
         "stars": 5,
-        "text": "cool"
-    },
-    {
-        "parkId": "henrychurchrockpicnicarea",
-        "stars": 4,
-        "text": "cool"
+        "text": "A long hike but very beautiful! Clean picnic area and lots of space. Not usually too crowded."
     },
     {
         "parkId": "kidstationplayground",
         "stars": 5,
-        "text": ""
+        "text": "A fun time!"
+    },
+    {
+        "parkId": "kidstationplayground",
+        "stars": 3,
+        "text": "Can be pretty crowded."
+    },
+    {
+        "parkId": "buckeyetrail-northernterminus",
+        "stars": 5,
+        "text": "Good!"
     }
 ]

@@ -95,49 +95,47 @@
         
                 <!-- Right panel -->
                 <div class="col-md-6 p-5 border-start custom-divider-left">
-                    <form>
-                        <form id="submitReview" method="POST" action="/submit-review" enctype="multipart/form-data">
-                            <h3>Park Name</h3>
-                            <select id="parkDropdown" name="parkName" class="form-select mb-5" style="background-color: #FEFAE0;">
-                                <option value="">Select a Park...</option>
-                            </select>
-                            <script>
-                                // Populate dropdown from parks.json
-                                fetch('data/parks.json')
-                                    .then(response => response.json())
-                                    .then(parks => {
-                                        const dropdown = document.getElementById('parkDropdown');
-                                        parks.forEach(park => {
-                                            const option = document.createElement('option');
-                                            option.value = park.name;
-                                            option.textContent = park.name;
-                                            dropdown.appendChild(option);
-                                        });
-                            
-                                        // After populating, check if URL has ?parkName=
-                                        const urlParams = new URLSearchParams(window.location.search);
-                                        const parkName = urlParams.get('parkName');
-                                        if (parkName) {
-                                            dropdown.value = parkName;
-                                        }
+                    <form id="submitReview" method="POST" action="/submit-review" enctype="multipart/form-data">
+                        <h3>Park Name</h3>
+                        <select id="parkDropdown" name="parkName" class="form-select mb-5" style="background-color: #FEFAE0;">
+                            <option value="">Select a Park...</option>
+                        </select>
+                        <script>
+                            // Populate dropdown from parks.json
+                            fetch('data/parks.json')
+                                .then(response => response.json())
+                                .then(parks => {
+                                    const dropdown = document.getElementById('parkDropdown');
+                                    parks.forEach(park => {
+                                        const option = document.createElement('option');
+                                        option.value = park.name;
+                                        option.textContent = park.name;
+                                        dropdown.appendChild(option);
                                     });
-                            </script>
-
+                            
+                                    // After populating, check if URL has ?parkName=
+                                    const urlParams = new URLSearchParams(window.location.search);
+                                    const parkName = urlParams.get('parkName');
+                                    if (parkName) {
+                                        dropdown.value = parkName;
+                                    }
+                                });
+                        </script>
                         
                         <!-- Interactive Star Rating -->
                         <h3>Rate This Park</h3>
                         <div class="col-md-6" style="padding-bottom: 5%">
                             <div class="rating-card">
                                 <div class="star-rating animated-stars">
-                                    <input type="radio" id="star5" name="rating" value="5">
+                                    <input type="radio" id="star5" name="star" value="5">
                                     <label for="star5" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star4" name="rating" value="4">
+                                    <input type="radio" id="star4" name="star" value="4">
                                     <label for="star4" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star3" name="rating" value="3">
+                                    <input type="radio" id="star3" name="star" value="3">
                                     <label for="star3" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star2" name="rating" value="2">
+                                    <input type="radio" id="star2" name="star" value="2">
                                     <label for="star2" class="bi bi-star-fill"></label>
-                                    <input type="radio" id="star1" name="rating" value="1">
+                                    <input type="radio" id="star1" name="star" value="1">
                                     <label for="star1" class="bi bi-star-fill"></label>
                                 </div>
                             </div>
@@ -145,7 +143,7 @@
                         <!-- End of Interactive Star Rating -->
 
                         <h3>Details on Your Experience</h3>
-                        <textarea class="form-control mb-4" rows="4" type="text" placeholder="Describe your experience" style="background-color: #FEFAE0;"></textarea>
+                        <textarea class="form-control mb-4" rows="4" name="text" placeholder="Describe your experience" style="background-color: #FEFAE0;"></textarea>
                         
                         <!-- Submit Button -->
                         <div class="col-md-6" style="padding-top: 3%">
@@ -155,7 +153,6 @@
                         </div>
                     </form>
                 </div>
-        
             </div>
         </div>      
 

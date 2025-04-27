@@ -86,6 +86,21 @@
             </div>
         </nav>
 
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const parkId = urlParams.get('id');
+
+            const parkInfoContainer = document.getElementById('parkInfo');
+
+            function showStars(stars) {
+                let html = '';
+                for (let i = 1; i <= 5; i++) {
+                    html += `<img src="images/${stars >= i ? 'starFilled' : 'starEmpty'}.svg" style="height: 30px; margin-right: 5px;"> `;
+                }
+                return html;
+            }
+        </script>
+
 
         <!-- Panels -->
         <div class="container-fluid push-down">
@@ -116,7 +131,7 @@
                         <!-- End of Interactive Star Rating -->
 
                         <!-- Checkbox Toggle Buttons -->
-                        <h3 style="font-weight: bold">Type</h3><h6>(select all that apply)</h6>
+                        <h3 style="font-weight: bold; margin-bottom: 15px;">Type</h3>
                         <div class="d-flex gap-4 mb-5">
                             <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" checked>
                             <label class="btn custom-btn" for="btn-check">Park</label>
@@ -128,7 +143,7 @@
 
                         <!-- Tag Selections -->
                         <div class="mb-4">
-                            <h3 style="font-weight: bold">Filter by Tag</h3><h6>(up to six)</h6>
+                            <h3 style="font-weight: bold">Filter by Tag</h3>
                             <!-- Dropdown Menu -->
                             <select id="tagDropdown" class="form-select" style="background-color: #FEFAE0;">
                                 <option value="">Select Tags...</option>
@@ -286,7 +301,7 @@
 
                                 const parkIcon = document.createElement('img');
                                 if (park.type === 'both') {
-                                    parkIcon.src = 'images/both1.svg';
+                                    parkIcon.src = 'images/both.svg';
                                 }
                                 else if (park.type === 'park') {
                                     parkIcon.src = 'images/park.svg';
