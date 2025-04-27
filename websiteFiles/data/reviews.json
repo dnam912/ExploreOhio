@@ -23,5 +23,25 @@
         "parkId": "buckeyetrail-northernterminus",
         "stars": 5,
         "text": "Good!"
+    },
+    {
+        "parkId": "nelsonledges",
+        "stars": 5,
+        "text": "Beautiful Location!\r\nI love the trails."
+    },
+    {
+        "parkId": "nelsonledges",
+        "stars": 1,
+        "text": "The signs and trail markers are very confusing! I almost got lost. There needs to be better signs."
+    },
+    {
+        "parkId": "nelsonledges",
+        "stars": 5,
+        "text": "A great place to go hiking. Many amazing sights. There's also a lake near by, so its perfect for fishing and for swimming as well!"
+    },
+    {
+        "parkId": "nelsonledges",
+        "stars": 4,
+        "text": "Its a pretty good park."
     }
 ]
