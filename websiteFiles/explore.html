@@ -56,7 +56,6 @@
         <!-- Include CSS -->
         <link href="css_files/style.css" rel="stylesheet"/>
         <link href="css_files/forms.css" rel="stylesheet"/>
-        
         <title>Explore Ohio</title>
     </head>
 
@@ -93,11 +92,11 @@
             
                 <!-- Left panel -->
                 <div class="col-md-6 p-5">
-                    <h2 class="text-center">Filters</h2>
+                    <h2 class="text-left" style="font-size: 3.0em; font-weight: bold">Filters</h2>
                     <form>
                         <!-- Interactive Star Rating -->
-                        <h3>Choose Minimum Star Rating</h3>
-                        <div class="col-md-6" style="padding-bottom: 5%">
+                        <h3 style="font-weight: bold">Choose Minimum Star Rating</h3>
+                        <div class="col-md-6" style="padding-bottom: 3%">
                             <div class="rating-card">
                                 <div class="star-rating animated-stars">
                                     <input type="radio" id="star5" name="rating" value="5">
@@ -116,185 +115,222 @@
                         <!-- End of Interactive Star Rating -->
 
                         <!-- Checkbox Toggle Buttons -->
-                        <h3>Type</h3><h6>(select all that apply)</h6>
+                        <h3 style="font-weight: bold">Type</h3><h6>(select all that apply)</h6>
                         <div class="d-flex gap-4 mb-5">
-                            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" checked>
                             <label class="btn custom-btn" for="btn-check">Park</label>
 
-                            <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
+                            <input type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off" checked>
                             <label class="btn custom-btn" for="btn-check-2">Hiking Trail</label>
                         </div>
-
+                        
 
                         <!-- Tag Selections -->
                         <div class="mb-4">
-                            <label for="tag-input" class="form-label"><h3>Filter by Tag</h3><h6>(up to six)</h6>
-                            </label>
-                
-                            <div class="input-group">
-                                <input class="form-control" type="text" id="tag-input" placeholder="Search" style="background-color: #FEFAE0">
-
-                                <button class="btn btn-outline-secondary" type="button" id="tag-search-btn">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
+                            <h3 style="font-weight: bold">Filter by Tag</h3><h6>(up to six)</h6>
+                            <!-- Dropdown Menu -->
+                            <select id="tagDropdown" class="form-select" style="background-color: #FEFAE0;"> 
+                                <option value="">Select Tags...</option>
+                            </select>
+                            <!-- Container to Hold Tags -->
+                            <div id="selectedTags" class="mt-3 d-flex flex-wrap gap-2"></div>
+                        
+                            <script>
+                                const selectedTags = new Set(); // make a set of selected tags
                             
-                            <!-- ===== ===== JQUERY in <div id="tag-list"> !!! ===== ===== -->
-                            <div id="tag-list" class="mt-3 d-flex flex-wrap gap-2">
-                                <span class="badge rounded-pill px-3 py-2" style="background-color: #626F47">
-                                waterfall <button type="button" class="btn-close btn-close-white btn-sm ms-2 remove-tag" aria-label="Remove"></button>
-                                </span>
-                                <span class="badge rounded-pill px-3 py-2" style="background-color: #626F47">
-                                beach <button type="button" class="btn-close btn-close-white btn-sm ms-2 remove-tag" aria-label="Remove"></button>
-                                </span>
-                            </div>
-                        </div>
+                                fetch('data/tags.json') // fetch tags from tags.json
+                                    .then(response => response.json())
+                                    .then(tags => { // tags is list of all tags
+                                        dropdown = document.getElementById('tagDropdown');
+                                        tagContainer = document.getElementById('selectedTags');
+                            
+                                        // go through each tag
+                                        tags.forEach(tag => {
+                                            option = document.createElement('option'); // create option in dropdown menu
+                                            option.value = tag;
+                                            option.textContent = tag;
+                                            dropdown.appendChild(option); // append this option to the dropdown menu
+                                        });
+                            
+                                        // listen for an option in the dropdown menu being selected
+                                        dropdown.addEventListener('change', () => {
+                                            const selected = dropdown.value;
+                                            selectedTags.add(selected); // add tag to selectedTags
+                            
+                                            // create tag box with selected tag's text
+                                            const tagBox = document.createElement('span');
+                                            tagBox.className = 'tags';
+                                            tagBox.textContent = selected;
 
+                                            // make tag unselectable via clicking on bubble
+                                            const remove = document.createElement('button');
+                                            remove.className = 'remove-tag';
+                                            remove.innerHTML = '&times;'; // centered 'x' symbol
+                                            remove.type = 'button';
+
+                                            // listen for x being clicked on
+                                            remove.addEventListener('click', () => {
+                                                event.preventDefault(); // make sure tag doesn't auto-submit form
+                                                selectedTags.delete(selected); // remove the tag from selectedTags
+                                                tagBox.remove(); // remove the tag visually
+                                                Array.from(dropdown.options).forEach(option => {
+                                                    if (option.value === selected) option.disabled = false; // re-enable option in dropdown menu
+                                                });
+                                            });
+                                                
+                                            tagBox.appendChild(remove); // add x to tagBox
+                                            tagContainer.appendChild(tagBox); // add whole tagBox to tag container
+                                    
+                                            // Disable selected option
+                                            Array.from(dropdown.options).forEach(option => {
+                                                if (option.value === selected) option.disabled = true;
+                                            });
+                                        });
+
+                                        // listens for form submission
+                                        document.getElementById('submitPark').addEventListener('submit', function(event) {
+                                            const tagsInput = document.getElementById('hiddenTags');
+                                            tagsInput.value = Array.from(selectedTags).join(','); // concatenate array into a string of all tags
+                                        });
+                                    });
+                            </script>
+                        </div> 
                         
                         <!-- Submit Random Button -->
                         <div class="d-flex align-items-center justify-content-center">
-                            <button type="submit" class="btn btn-success ms-lg-3" style="font-size: x-large">Give Me Something Random!</button>
+                            <button id="randomParkBtn" class="btn btn-brand ms-lg-3" style="font-size: x-large; font-weight: bold;">Give Me Something Random!</button>
+                            <script>
+                                document.getElementById('randomParkBtn').addEventListener('click', function(event) {
+                                    event.preventDefault(); // prevent form submit if it's inside one
+                                    fetch('data/parks.json')
+                                        .then(response => response.json())
+                                        .then(parks => {
+                                            const randomPark = parks[Math.floor(Math.random() * parks.length)];
+                                            window.location.href = `parkPage.html?id=${randomPark.id}`;
+                                        });
+                                });
+                            </script>
                         </div>
                     </form>
                 </div>
         
                 <!-- Right panel -->
                 <div class="col-md-6 p-5 border-start custom-divider-left scrollable-panel">
-                    <h2>Top Rated Parks</h2>
-
-                    <!-- Park Lists -->
-                    <div class="d-flex flex-column gap-3 custom-park">
-                        
-                        <!-- Card 1 -->
-                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-bold" style="font-size: 1.5rem; align-self: flex-start;">1</div>
-                                <div style="border: 2px solid black; width: 70px; height: 70px;">Photo</div>
-                                <div>
-                                    <div class="fw-bold" id="parks">Bright Kent Park</div>
-                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
-                                        <span class="me-3">5.0</span>
-                                        <span style="color: #ffc250df;">★★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
-                        </div>
-                          
-                        
-                        <!-- Card 2 -->
-                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-bold" style="font-size: 1.5rem; align-self: flex-start;">2</div>
-                                <div style="border: 2px solid black; width: 70px; height: 70px;">Photo</div>
-                                <div>
-                                    <div class="fw-bold" id="parks">Peaceful Akron Park</div>
-                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
-                                        <span class="me-3">5.0</span>
-                                        <span style="color: #ffc250df;">★★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
-                        </div>
-  
-                        <!-- Card 3 -->
-                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-bold" style="font-size: 1.5rem; align-self: flex-start;">3</div>
-                                <div style="border: 2px solid black; width: 70px; height: 70px;">Photo</div>
-                                <div>
-                                    <div class="fw-bold" id="parks">Vivid Canton Mountain</div>
-                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
-                                        <span class="me-3">4.9</span>
-                                        <span style="color: #ffc250df;">★★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-bold" style="font-size: 1.5rem; align-self: flex-start;">4</div>
-                                <div style="border: 2px solid black; width: 70px; height: 70px;">Photo</div>
-                                <div>
-                                    <div class="fw-bold" id="parks">Vivid Canton Mountain</div>
-                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
-                                        <span class="me-3">4.8</span>
-                                        <span style="color: #ffc250df;">★★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
-                        </div>
-
-                        <!-- Card 5 -->
-                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-bold" style="font-size: 1.5rem; align-self: flex-start;">5</div>
-                                <div style="border: 2px solid black; width: 70px; height: 70px;">Photo</div>
-                                <div>
-                                    <div class="fw-bold" id="parks">Vivid Canton Mountain</div>
-                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
-                                        <span class="me-3">4.5</span>
-                                        <span style="color: #ffc250df;">★★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
-                        </div>
-
-                        <!-- Card 6 -->
-                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-bold" style="font-size: 1.5rem; align-self: flex-start;">6</div>
-                                <div style="border: 2px solid black; width: 70px; height: 70px;">Photo</div>
-                                <div>
-                                    <div class="fw-bold" id="parks">Vivid Canton Mountain</div>
-                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
-                                        <span class="me-3">4.3</span>
-                                        <span style="color: #ffc250df;">★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
-                        </div>
-
-                        <!-- Card 7 -->
-                        <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-bold" style="font-size: 1.5rem; align-self: flex-start;">7</div>
-                                <div style="border: 2px solid black; width: 70px; height: 70px;">Photo</div>
-                                <div>
-                                    <div class="fw-bold" id="parks">Vivid Canton Mountain</div>
-                                    <div class="d-flex align-items-center" style="font-size: 1.25rem;">
-                                        <span class="me-3">4.1</span>
-                                        <span style="color: #ffc250df;">★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="bi bi-tree-fill fs-4 text-muted"></i>
-                        </div>
-                        
-
+                    <div class="mb-4">
+                        <h2 style="font-size: 3.0em; font-weight: bold">Top Rated Parks</h2>
                     </div>
+                    <script>
+                        let allParks = []; // ← new global variable
+                    
+                        fetch('data/parks.json')
+                            .then(response => response.json())
+                            .then(parks => {
+                                allParks = parks;
+                                displayParks(allParks);
+                            });
+                            
+                        // Allow unchecking rating stars
+                        document.querySelectorAll('input[name="rating"]').forEach(radio => {
+                            radio.addEventListener('click', function (e) {
+                                if (this.previousChecked) {
+                                    this.checked = false;
+                                    this.previousChecked = false;
+                                } else {
+                                    // Uncheck any other radio buttons
+                                    document.querySelectorAll('input[name="rating"]').forEach(r => r.previousChecked = false);
+                                    this.previousChecked = true;
+                                }
+                                filterParks(); // update parks after clicking
+                            });
+                        });
+
+                    
+                        function displayParks(parks) {
+                            const container = document.querySelector('.col-md-6.p-5.border-start');
+                            container.innerHTML = '<div class="mb-4"><h2 style="font-size: 3.0em; font-weight: bold">Top Rated Parks</h2></div>';
+                    
+                            parks.sort((a, b) => b.rating.value - a.rating.value);
+                    
+                            parks.forEach((park, i) => {
+                                const { name, rating, id } = park;
+                                const stars = rating.value.toFixed(1);
+                                const photoLocation = `data/photos/${id}-a.jpg`;
+                    
+                                const box = document.createElement('div');
+                                box.className = 'd-flex align-items-center mb-4 bg-light p-3 rounded';
+                                box.style = 'background-color: #FEFAE0 !important; cursor: pointer;'; 
+                                box.onclick = () => { window.location.href = `parkPage.html?id=${id}`; };
+                    
+                                const img = document.createElement('img');
+                                img.src = photoLocation;
+                                img.style = 'width: 150px; height: 150px;';
+                                img.className = 'me-3 rounded';
+                    
+                                const content = document.createElement('div');
+                                const title = document.createElement('h5');
+                                title.innerHTML = `<strong>${i + 1}).</strong> ${name}`;
+                                title.style = 'font-size: x-large;'
+                    
+                                const ratingBox = document.createElement('div');
+                                ratingBox.innerHTML = showStars(rating.value);
+                    
+                                content.appendChild(title);
+                                content.appendChild(ratingBox);
+                                box.appendChild(img);
+                                box.appendChild(content);
+                                container.appendChild(box);
+                            });
+                        }
+                    
+                        function showStars(stars) {
+                            let html = '';
+                            for (let i = 1; i <= 5; i++) {
+                                html += `<img src="images/${stars >= i ? 'starFilled' : 'starEmpty'}.svg" style="height: 30px;"> `;
+                            }
+                            return html;
+                        }
+                    </script>
+                    <script>
+                        function filterParks() {
+                            const selectedRating = document.querySelector('input[name="rating"]:checked')?.value || 0;
+                            const isPark = document.getElementById('btn-check').checked;
+                            const isTrail = document.getElementById('btn-check-2').checked;
+                            const selectedTags = Array.from(document.querySelectorAll('#selectedTags .tags')).map(tag => tag.childNodes[0].textContent.trim());
+                    
+                            const filtered = allParks.filter(park => {
+                                const matchesRating = park.rating.value >= selectedRating;
+                                const matchesType = (park.type === 'park' && isPark) || (park.type === 'trail' && isTrail) || (park.type === 'both' && (isPark || isTrail));
+                                const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => park.tags.includes(tag));
+                    
+                                return matchesRating && matchesType && matchesTags;
+                            });
+                    
+                            displayParks(filtered);
+                        }
+                    
+                        // Listen for changes
+                        document.querySelectorAll('input[name="rating"]').forEach(radio => {
+                            radio.addEventListener('change', filterParks);
+                        });
+                    
+                        document.getElementById('btn-check').addEventListener('change', filterParks);
+                        document.getElementById('btn-check-2').addEventListener('change', filterParks);
+                    
+                        // Tags — listen when a tag is removed or added
+                        document.getElementById('tagDropdown').addEventListener('change', () => {
+                            setTimeout(filterParks, 100); // give time for DOM to update
+                        });
+                        document.getElementById('selectedTags').addEventListener('click', (e) => {
+                            if (e.target.classList.contains('remove-tag')) {
+                                setTimeout(filterParks, 100);
+                            }
+                        });
+                    </script>
+                                        
                 </div>
-        
             </div>
         </div>      
 
-
-        <!-- Hightlight the current page link -->
-        <script>
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.href === window.location.href) {
-                    link.classList.add('active');
-                }
-            });
-        </script>
-        
         <!-- Background -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
     </body>
