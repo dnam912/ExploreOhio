@@ -262,7 +262,7 @@
 
                     
                         function displayParks(parks) {
-                            const container = document.querySelector('.col-md-6.p-5.border-start');
+                            const container = document.querySelector('.col-md-6.p-5.border-start'); // 
                             container.innerHTML = '<div class="mb-4"><h2 style="font-size: 3.0em; font-weight: bold">Top Rated Parks</h2></div>';
                     
                             parks.sort((a, b) => b.rating.value - a.rating.value);
@@ -284,7 +284,7 @@
                     
                                 const content = document.createElement('div');
                                 const title = document.createElement('h5');
-                                title.innerHTML = `<strong>${i + 1}). ${name}</strong>`;
+                                title.innerHTML = `<strong>${i + 1}. ${name}</strong>`;
                                 title.style = 'font-size: xx-large; color: #626F47'
                     
                                 const ratingBox = document.createElement('div');
@@ -365,7 +365,17 @@
                                         
                 </div>
             </div>
-        </div>      
+        </div>
+
+
+        <!-- Hightlight the current page link -->
+        <script>
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
 
         <!-- Background -->
         <img class="bg-img" src="images/wallpaper.jpg" class="img-fluid" alt="Responsive image">
