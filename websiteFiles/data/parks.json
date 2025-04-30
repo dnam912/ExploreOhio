@@ -16,9 +16,9 @@
         ],
         "type": "both",
         "rating": {
-            "amount": 1,
-            "weight": 5,
-            "value": 5.0
+            "amount": 2,
+            "weight": 9,
+            "value": 4.5
         }
     },
     {
@@ -54,8 +54,8 @@
         ],
         "type": "trail",
         "rating": {
-            "amount": 1,
-            "weight": 5,
+            "amount": 3,
+            "weight": 15,
             "value": 5.0
         }
     },
@@ -95,9 +95,72 @@
         ],
         "type": "both",
         "rating": {
-            "amount": 0,
-            "weight": 0,
-            "value": 0
+            "amount": 1,
+            "weight": 4,
+            "value": 4.0
+        }
+    },
+    {
+        "id": "shawneestatepark",
+        "name": "Shawnee State Park",
+        "location": {
+            "longitude": -83.115,
+            "latitude": 38.678
+        },
+        "tags": [
+            "beach",
+            "fishing",
+            "swimming",
+            "camping",
+            "nature center",
+            "moderate"
+        ],
+        "type": "both",
+        "rating": {
+            "amount": 3,
+            "weight": 12,
+            "value": 4.0
+        }
+    },
+    {
+        "id": "hockinghillsstatepark",
+        "name": "Hocking Hills State Park",
+        "location": {
+            "longitude": -82.548,
+            "latitude": 39.433
+        },
+        "tags": [
+            "waterfall",
+            "cave",
+            "forest",
+            "natural trail",
+            "difficult"
+        ],
+        "type": "trail",
+        "rating": {
+            "amount": 2,
+            "weight": 9,
+            "value": 4.5
+        }
+    },
+    {
+        "id": "conkleshollow",
+        "name": "Conkles Hollow",
+        "location": {
+            "longitude": -82.573,
+            "latitude": 39.453
+        },
+        "tags": [
+            "difficult",
+            "forest",
+            "natural trail",
+            "cave"
+        ],
+        "type": "trail",
+        "rating": {
+            "amount": 1,
+            "weight": 4,
+            "value": 4.0
         }
     }
 ]

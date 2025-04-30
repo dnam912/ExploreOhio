@@ -43,5 +43,55 @@
         "parkId": "nelsonledges",
         "stars": 4,
         "text": "Its a pretty good park."
+    },
+    {
+        "parkId": "buckeyetrail-northernterminus",
+        "stars": 5,
+        "text": "Great view of Lake Erie."
+    },
+    {
+        "parkId": "buckeyetrail-northernterminus",
+        "stars": 5,
+        "text": "A great start to the Buckeye trail!"
+    },
+    {
+        "parkId": "henrychurchrockpicnicarea",
+        "stars": 4,
+        "text": "The trail is falling apart a bit near the waterfall, but its still very pretty! I wish it didn't have to close when the weather gets bad. They should fix up some of the trail."
+    },
+    {
+        "parkId": "shawneestatepark",
+        "stars": 4,
+        "text": "A great place to go boating and fishing."
+    },
+    {
+        "parkId": "shawneestatepark",
+        "stars": 3,
+        "text": "It can be very crowded during the summers."
+    },
+    {
+        "parkId": "shawneestatepark",
+        "stars": 5,
+        "text": "I go here with my family every year! Its always a lovely time."
+    },
+    {
+        "parkId": "hockinghillsstatepark",
+        "stars": 5,
+        "text": "So many cool cabins to stay at!"
+    },
+    {
+        "parkId": "hockinghillsstatepark",
+        "stars": 4,
+        "text": "Here is a lot of text to demo how reviews expand - teeeeeeeeeeeeeeeeeeeeeeeeeeeest teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest teeeeeeeeeeeeeeeeeeeeest teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest teeeeeeeeeeeeeeeeeeeest. Test Done."
+    },
+    {
+        "parkId": "brandywinefalls",
+        "stars": 4,
+        "text": "Fun!"
+    },
+    {
+        "parkId": "conkleshollow",
+        "stars": 4,
+        "text": "The ledges are very high up. Scary but fun!"
     }
 ]
